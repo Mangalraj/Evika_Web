@@ -1,12 +1,12 @@
 // src/pages/ProductDetailPage.tsx
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-// Import all Lucide icons you might use for features
 import {
+  ArrowLeft,
   Check,
   Play,
   ClipboardCheck,
@@ -53,9 +53,8 @@ const getLucideIcon = (iconName: string) => {
     Globe,
     FlaskConical,
     BookOpen,
-    // Add any other Lucide icons you might use here
   };
-  return icons[iconName] || Check; // Default to Check if not found
+  return icons[iconName] || Check;
 };
 
 const ProductDetailPage = () => {
@@ -94,36 +93,54 @@ const ProductDetailPage = () => {
 
         {/* Detailed Content Section */}
         <section className="py-20 px-6">
-          <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div className="container mx-auto">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-8"
             >
-              <img
-                src={product.image}
-                alt={product.alt}
-                className="w-full rounded-3xl shadow-xl"
-              />
+              <Button asChild variant="ghost" className="text-muted-foreground">
+                <Link to="/products">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to All Products
+                </Link>
+              </Button>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Overview
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {product.longDescription}
-              </p>
-            </motion.div>
+          
+
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <img
+                  src={product.image}
+                  alt={product.alt}
+                  className="w-full rounded-3xl shadow-xl"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl font-bold text-foreground mb-4">
+                  Overview
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {product.longDescription}
+                </p>
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* Features Section - UPDATED TO USE ICONS */}
+
+        {/* Features Section */}
         <section className="py-20 px-6 bg-secondary">
           <div className="container mx-auto">
             <h2 className="text-4xl font-bold text-primary mb-12 text-center">
@@ -131,19 +148,18 @@ const ProductDetailPage = () => {
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {product.features.map((feature, index) => {
-                const IconComponent = getLucideIcon(feature.icon); // Get the icon component
+                const IconComponent = getLucideIcon(feature.icon);
                 return (
                   <motion.div
-                    key={feature.name} // Use feature.name as key
+                    key={feature.name}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="text-center p-6 bg-background rounded-xl shadow-md" // Added styling for the card
+                    className="text-center p-6 bg-background rounded-xl shadow-md"
                   >
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <IconComponent className="w-8 h-8 text-primary" />{" "}
-                      {/* Render the icon */}
+                      <IconComponent className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold text-foreground">
                       {feature.name}
