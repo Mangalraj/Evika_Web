@@ -42,8 +42,8 @@ const Contact = () => {
                   Corporate Address
                 </h2>
                 <p className="text-foreground">
-                  Venture Development centre, GiTAM Bengaluru, Nagadenahalli,
-                  karnataka - 561203
+                  Venture Development centre, GITAM Bengaluru, Nagadenahalli,
+                  Karnataka - 561203
                 </p>
                 {/* === MODIFIED ADDRESS SECTION END === */}
 
