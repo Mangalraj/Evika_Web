@@ -64,12 +64,14 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="bg-secondary rounded-3xl border-2 border-primary/30 overflow-hidden aspect-square"
               >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8!2d77.6!3d12.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzAwLjAiTiA3N8KwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d677.8078881310778!2d77.59589632922231!3d13.28755957680955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb1df1ef700c569%3A0x63c48bea1860047d!2sGitam%20School%20Of%20Technology!5e0!3m2!1sen!2sin!4v1761298694945!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border:0 }} 
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
                   title="Location Map"
                 ></iframe>
               </motion.div>
