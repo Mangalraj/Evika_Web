@@ -30,13 +30,31 @@ const Contact = () => {
                 transition={{ duration: 0.6 }}
                 className="bg-secondary p-8 rounded-3xl border-2 border-primary/30"
               >
-                <h2 className="text-2xl font-bold text-primary mb-4">Address</h2>
-                <p className="text-foreground">Room no 427,Shivaji Bhavan, GITAM-Bengaluru</p>
+                {/* === MODIFIED ADDRESS SECTION START === */}
+                <h2 className="text-2xl font-bold text-primary mb-4">
+                  Registered Address
+                </h2>
+                <p className="text-foreground mb-6">
+                  3/46 B Gandhinagar, Kappalur, Madurai - 625008
+                </p>
 
-                <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Phone Number</h2>
+                <h2 className="text-2xl font-bold text-primary mb-4">
+                  Corporate Address
+                </h2>
+                <p className="text-foreground">
+                  Venture Development centre, GiTAM Bengaluru, Nagadenahalli,
+                  karnataka - 561203
+                </p>
+                {/* === MODIFIED ADDRESS SECTION END === */}
+
+                <h2 className="text-2xl font-bold text-primary mb-4 mt-6">
+                  Phone Number
+                </h2>
                 <p className="text-foreground">+91 9585985444</p>
 
-                <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Email</h2>
+                <h2 className="text-2xl font-bold text-primary mb-4 mt-6">
+                  Email
+                </h2>
                 <p className="text-foreground">support@evikainnovations.com</p>
               </motion.div>
 
@@ -65,7 +83,9 @@ const Contact = () => {
               className="bg-secondary p-8 rounded-3xl border-2 border-primary/30 space-y-6"
             >
               <div>
-                <label className="text-primary font-semibold mb-2 block">Name</label>
+                <label className="text-primary font-semibold mb-2 block">
+                  Name
+                </label>
                 <Input
                   placeholder="Enter here"
                   className="h-12 bg-background border-primary/30"
@@ -73,7 +93,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <label className="text-primary font-semibold mb-2 block">Email</label>
+                <label className="text-primary font-semibold mb-2 block">
+                  Email
+                </label>
                 <Input
                   type="email"
                   placeholder="Enter here"
@@ -82,7 +104,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <label className="text-primary font-semibold mb-2 block">Phone</label>
+                <label className="text-primary font-semibold mb-2 block">
+                  Phone
+                </label>
                 <Input
                   type="tel"
                   placeholder="Enter here"
@@ -91,7 +115,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <label className="text-primary font-semibold mb-2 block">Message</label>
+                <label className="text-primary font-semibold mb-2 block">
+                  Message
+                </label>
                 <Textarea
                   placeholder="Enter here"
                   className="min-h-[160px] bg-background border-primary/30"
