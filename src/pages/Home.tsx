@@ -173,30 +173,60 @@ const Home = () => {
       </section>
 
       {/* === FINAL CALL TO ACTION (CTA) SECTION START === */}
-      <section className="py-20 px-6 bg-secondary">
+      <section className="py-20 px-6 bg-background">
         <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="bg-background p-12 rounded-3xl border-2 border-primary/30 text-center max-w-4xl mx-auto"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-lg text-foreground max-w-2xl mx-auto mb-8">
-              See how our XR and AI solutions can revolutionize your training, operations, and user experiences. Schedule a free demo with our experts today.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="w-full sm:w-auto">
-                Book a Free Demo
-              </Button>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                View Our Services
-              </Button>
-            </div>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-12 items-center bg-secondary p-8 sm:p-12 rounded-3xl border-2 border-primary/30">
+            {/* Left Column: The Pitch */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+                Step into the Future.
+              </h2>
+              <p className="text-lg text-foreground mb-8">
+                Let's discuss how our XR and AI solutions can unlock new possibilities and create a competitive advantage for your organization.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="w-full sm:w-auto">
+                  Book a Demo
+                </Button>
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                  Explore Solutions
+                </Button>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Interactive Graphic */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative h-64 md:h-full w-full"
+            >
+              {/* This div is the container for the animation */}
+              <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl">
+                {/* Glowing Orb 1 */}
+                <div 
+                  className="absolute w-48 h-48 bg-primary/20 rounded-full filter blur-2xl"
+                  style={{ animation: 'move-orb-1 15s infinite ease-in-out' }}
+                />
+                {/* Glowing Orb 2 */}
+                <div 
+                  className="absolute w-40 h-40 bg-purple-500/20 rounded-full filter blur-2xl"
+                  style={{ animation: 'move-orb-2 18s infinite ease-in-out -4s' }}
+                />
+                {/* Glowing Orb 3 */}
+                <div 
+                  className="absolute w-32 h-32 bg-teal-500/20 rounded-full filter blur-2xl"
+                  style={{ animation: 'move-orb-3 12s infinite ease-in-out -2s' }}
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
