@@ -106,3 +106,20 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* === Add this for the animated CTA graphic === */
+@keyframes move-orb-1 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(60px, 40px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes move-orb-2 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-50px, -30px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes move-orb-3 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(40px, -50px); }
+  100% { transform: translate(0, 0); }
+}
