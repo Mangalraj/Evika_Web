@@ -31,13 +31,13 @@ const Contact = () => {
                 className="bg-secondary p-8 rounded-3xl border-2 border-primary/30"
               >
                 <h2 className="text-2xl font-bold text-primary mb-4">Address</h2>
-                <p className="text-foreground">Room no 427, VDC, GITAM-Bengaluru</p>
+                <p className="text-foreground">Room no 427,Shivaji Bhavan, GITAM-Bengaluru</p>
 
                 <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Phone Number</h2>
-                <p className="text-foreground">+91 1234567890</p>
+                <p className="text-foreground">+91 9585985444</p>
 
                 <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Email</h2>
-                <p className="text-foreground">contact@evikainnovations.com</p>
+                <p className="text-foreground">support@evikainnovations.com</p>
               </motion.div>
 
               <motion.div
