@@ -94,23 +94,7 @@ const ProductDetailPage = () => {
         {/* Detailed Content Section */}
         <section className="py-20 px-6">
           <div className="container mx-auto">
-            {/* THIS IS THE MODIFIED PART */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              // These classes create the sticky navbar effect.
-              // IMPORTANT: Adjust `top-16` to match your main Navbar's height.
-              className="sticky top-16 z-10 bg-background py-3 mb-8 border-b"
-            >
-              <Button asChild variant="ghost" className="text-muted-foreground">
-                <Link to="/products">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to All Products
-                </Link>
-              </Button>
-            </motion.div>
-
+            {/* The old sticky button was removed from here */}
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -200,6 +184,21 @@ const ProductDetailPage = () => {
           </div>
         </section>
       </main>
+
+      {/* Floating "Back to Products" Button */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
+        className="fixed bottom-8 right-8 z-50"
+      >
+        <Button asChild size="icon" className="h-14 w-14 rounded-full shadow-lg">
+          <Link to="/products" aria-label="Back to All Products">
+            <ArrowLeft className="h-6 w-6" />
+          </Link>
+        </Button>
+      </motion.div>
+
       <Footer />
     </div>
   );
