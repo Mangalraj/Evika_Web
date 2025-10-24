@@ -6,6 +6,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   ArrowLeft,
   Check,
   Play,
@@ -184,19 +190,33 @@ const ProductDetailPage = () => {
         </section>
       </main>
 
-      {/* Floating "Back to Products" Button */}
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
-        className="fixed top-20 right-8 z-50" // Button is now at the top-right
-      >
-        <Button asChild size="icon" className="h-14 w-14 rounded-full shadow-lg">
-          <Link to="/products" aria-label="Back to All Products">
-            <ArrowLeft className="h-6 w-6" />
-          </Link>
-        </Button>
-      </motion.div>
+      {/* Floating "Back to Products" Button with Tooltip */}
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
+              // Adjust top-20 to be navbar height + desired space
+              className="fixed top-20 right-8 z-50"
+            >
+              <Button
+                asChild
+                size="icon"
+                className="h-14 w-14 rounded-full shadow-lg"
+              >
+                <Link to="/products" aria-label="Back to All Products">
+                  <ArrowLeft className="h-6 w-6" />
+                </Link>
+              </Button>
+            </motion.div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Back to All Products</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
       <Footer />
     </div>
