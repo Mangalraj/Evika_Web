@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-secondary py-12 px-6">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-8">
-          {/* LOGO IMAGE: The text has been replaced with your logo */}
+          {/* LOGO IMAGE */}
           <img
             src="/logo.png"
             alt="Evika Innovations Logo"
@@ -41,6 +41,7 @@ const Footer = () => {
                 </div>
               </div>
 
+              {/* === MODIFIED ADDRESS SECTION START === */}
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
@@ -48,12 +49,14 @@ const Footer = () => {
                 <div className="text-left">
                   <p className="font-semibold text-foreground">Find us</p>
                   <p className="text-sm text-muted-foreground">
-                    Room no 427, Shivaji Bhavan,
+                    Venture Development Centre, GiTAM Bengaluru,
                     <br />
-                    GITAM-Bengaluru
+                    Nagadenahalli, Karnataka - 561203
                   </p>
                 </div>
               </div>
+              {/* === MODIFIED ADDRESS SECTION END === */}
+
             </div>
           </div>
         </div>
