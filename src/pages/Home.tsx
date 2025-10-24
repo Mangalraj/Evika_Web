@@ -172,48 +172,31 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-20 px-6 bg-background">
+      {/* === FINAL CALL TO ACTION (CTA) SECTION START === */}
+      <section className="py-20 px-6 bg-secondary">
         <div className="container mx-auto">
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-primary text-center mb-12"
+            className="bg-background p-12 rounded-3xl border-2 border-primary/30 text-center max-w-4xl mx-auto"
           >
-            Contact Us
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80"
-                alt="Contact"
-                className="w-full rounded-3xl"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <Input placeholder="Enter your name" className="h-12 bg-secondary border-primary/30" />
-              <Input placeholder="Enter your email address" type="email" className="h-12 bg-secondary border-primary/30" />
-              <Textarea placeholder="Enter your message" className="min-h-[200px] bg-secondary border-primary/30" />
-              <Button size="lg" className="w-full">
-                Send Message
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+              Ready to Transform Your Business?
+            </h2>
+            <p className="text-lg text-foreground max-w-2xl mx-auto mb-8">
+              See how our XR and AI solutions can revolutionize your training, operations, and user experiences. Schedule a free demo with our experts today.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button size="lg" className="w-full sm:w-auto">
+                Book a Free Demo
               </Button>
-            </motion.div>
-          </div>
+              <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                View Our Services
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
