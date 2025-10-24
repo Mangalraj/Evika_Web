@@ -94,11 +94,13 @@ const ProductDetailPage = () => {
         {/* Detailed Content Section */}
         <section className="py-20 px-6">
           <div className="container mx-auto">
+            {/* THIS IS THE MODIFIED PART */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-8"
+              // Added sticky classes here. Adjust top-16 to match your Navbar's height.
+              className="sticky top-16 z-10 bg-background py-4 mb-4 border-b"
             >
               <Button asChild variant="ghost" className="text-muted-foreground">
                 <Link to="/products">
@@ -107,7 +109,6 @@ const ProductDetailPage = () => {
                 </Link>
               </Button>
             </motion.div>
-          
 
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -138,7 +139,6 @@ const ProductDetailPage = () => {
             </div>
           </div>
         </section>
-
 
         {/* Features Section */}
         <section className="py-20 px-6 bg-secondary">
