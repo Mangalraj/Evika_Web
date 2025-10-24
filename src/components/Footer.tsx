@@ -24,7 +24,7 @@ const Footer = () => {
                 <div className="text-left">
                   <p className="font-semibold text-foreground">Call Us</p>
                   <p className="text-sm text-muted-foreground">
-                    +91 1234567890
+                    +91 9585985444
                   </p>
                 </div>
               </div>
@@ -36,7 +36,7 @@ const Footer = () => {
                 <div className="text-left">
                   <p className="font-semibold text-foreground">Mail us</p>
                   <p className="text-sm text-muted-foreground">
-                    AXRBLA@gmail.com
+                    support@evikainnovations.com
                   </p>
                 </div>
               </div>
@@ -48,7 +48,7 @@ const Footer = () => {
                 <div className="text-left">
                   <p className="font-semibold text-foreground">Find us</p>
                   <p className="text-sm text-muted-foreground">
-                    Room no 427, VDC,
+                    Room no 427, Shivaji Bhavan,
                     <br />
                     GITAM-Bengaluru
                   </p>
