@@ -77,7 +77,7 @@ const ProductDetailPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        {/* Hero Section for the Product */}
+        {/* Hero Section for the Product (No changes here) */}
         <section className="py-20 px-6 bg-secondary">
           <div className="container mx-auto text-center">
             <motion.h1
@@ -91,16 +91,17 @@ const ProductDetailPage = () => {
           </div>
         </section>
 
-        {/* Detailed Content Section */}
+        {/* ======================= START OF MODIFIED SECTION ======================= */}
+        {/* Main Content Section with Two-Column Layout */}
         <section className="py-20 px-6">
-          <div className="container mx-auto">
-            {/* THIS IS THE MODIFIED PART */}
+          <div className="container mx-auto grid lg:grid-cols-[250px_1fr] gap-12">
+            {/* --- Column 1: Sticky Navigation --- */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              // Added sticky classes here. Adjust top-16 to match your Navbar's height.
-              className="sticky top-16 z-10 bg-background py-4 mb-4 border-b"
+              // Adjust top-24 to match your Navbar height + desired padding
+              className="sticky top-24 h-fit hidden lg:block"
             >
               <Button asChild variant="ghost" className="text-muted-foreground">
                 <Link to="/products">
@@ -110,94 +111,95 @@ const ProductDetailPage = () => {
               </Button>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <img
-                  src={product.image}
-                  alt={product.alt}
-                  className="w-full rounded-3xl shadow-xl"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-3xl font-bold text-foreground mb-4">
-                  Overview
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  {product.longDescription}
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="py-20 px-6 bg-secondary">
-          <div className="container mx-auto">
-            <h2 className="text-4xl font-bold text-primary mb-12 text-center">
-              Key Features
-            </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {product.features.map((feature, index) => {
-                const IconComponent = getLucideIcon(feature.icon);
-                return (
-                  <motion.div
-                    key={feature.name}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="text-center p-6 bg-background rounded-xl shadow-md"
-                  >
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <IconComponent className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {feature.name}
-                    </h3>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Demo Video Section */}
-        <section className="py-20 px-6 bg-background">
-          <div className="container mx-auto text-center">
-            <h2 className="text-4xl font-bold text-primary mb-12">
-              Watch it in Action
-            </h2>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-muted rounded-3xl aspect-video flex items-center justify-center max-w-4xl mx-auto cursor-pointer group shadow-lg"
-            >
-              <div className="text-center">
-                <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/30 transition-all duration-300 transform group-hover:scale-110">
-                  <Play
-                    className="w-12 h-12 text-primary"
-                    fill="currentColor"
+            {/* --- Column 2: Scrollable Main Content --- */}
+            <div className="space-y-24">
+              {/* Overview Content */}
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.alt}
+                    className="w-full rounded-3xl shadow-xl"
                   />
-                </div>
-                <p className="text-muted-foreground font-semibold">
-                  Play Demo Video
-                </p>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
+                    Overview
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {product.longDescription}
+                  </p>
+                </motion.div>
               </div>
-            </motion.div>
+
+              {/* Features Content */}
+              <div className="p-8 rounded-2xl bg-secondary">
+                <h2 className="text-4xl font-bold text-primary mb-12 text-center">
+                  Key Features
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {product.features.map((feature, index) => {
+                    const IconComponent = getLucideIcon(feature.icon);
+                    return (
+                      <motion.div
+                        key={feature.name}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="text-center p-6 bg-background rounded-xl shadow-md"
+                      >
+                        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <IconComponent className="w-8 h-8 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-foreground">
+                          {feature.name}
+                        </h3>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Demo Video Content */}
+              <div className="text-center">
+                <h2 className="text-4xl font-bold text-primary mb-12">
+                  Watch it in Action
+                </h2>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="bg-muted rounded-3xl aspect-video flex items-center justify-center max-w-4xl mx-auto cursor-pointer group shadow-lg"
+                >
+                  <div className="text-center">
+                    <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/30 transition-all duration-300 transform group-hover:scale-110">
+                      <Play
+                        className="w-12 h-12 text-primary"
+                        fill="currentColor"
+                      />
+                    </div>
+                    <p className="text-muted-foreground font-semibold">
+                      Play Demo Video
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </section>
+        {/* ======================== END OF MODIFIED SECTION ======================== */}
       </main>
       <Footer />
     </div>
