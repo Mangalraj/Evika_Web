@@ -16,7 +16,8 @@ const Footer = () => {
             <h3 className="text-2xl font-bold text-primary mb-6">
               Get in Touch
             </h3>
-            <div className="flex flex-col sm:flex-row gap-8 items-center">
+            {/* THIS IS THE CORRECTED DIV */}
+            <div className="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-primary" />
@@ -41,7 +42,6 @@ const Footer = () => {
                 </div>
               </div>
 
-              {/* === MODIFIED ADDRESS SECTION START === */}
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
@@ -49,14 +49,12 @@ const Footer = () => {
                 <div className="text-left">
                   <p className="font-semibold text-foreground">Find us</p>
                   <p className="text-sm text-muted-foreground">
-                    Venture Development Centre, GiTAM Bengaluru,
+                    Venture Development Centre, GITAM Bengaluru,
                     <br />
                     Nagadenahalli, Karnataka - 561203
                   </p>
                 </div>
               </div>
-              {/* === MODIFIED ADDRESS SECTION END === */}
-
             </div>
           </div>
         </div>
