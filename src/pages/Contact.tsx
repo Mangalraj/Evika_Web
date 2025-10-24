@@ -38,12 +38,12 @@ const Contact = () => {
     const data = await response.json();
 
     if (response.ok) {
-      setResult("Message sent successfully! ✅");
+      setResult("Message sent successfully! ");
       // Clear the form fields after successful submission
       setFormData({ name: "", email: "", phone: "", message: "" });
     } else {
       console.error("Error:", data.message);
-      setResult(data.message || "Something went wrong! ❌");
+      setResult(data.message || "Something went wrong! ");
     }
   };
 
