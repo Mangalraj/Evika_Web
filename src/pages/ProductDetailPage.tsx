@@ -94,7 +94,6 @@ const ProductDetailPage = () => {
         {/* Detailed Content Section */}
         <section className="py-20 px-6">
           <div className="container mx-auto">
-            {/* The old sticky button was removed from here */}
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -190,7 +189,7 @@ const ProductDetailPage = () => {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
-        className="fixed bottom-8 right-8 z-50"
+        className="fixed top-20 right-8 z-50" // Button is now at the top-right
       >
         <Button asChild size="icon" className="h-14 w-14 rounded-full shadow-lg">
           <Link to="/products" aria-label="Back to All Products">
