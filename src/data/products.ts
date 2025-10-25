@@ -1,6 +1,5 @@
 // src/data/products.ts
 
-// Update the interface to reflect the new feature structure
 export interface Product {
   slug: string;
   title: string;
@@ -8,7 +7,6 @@ export interface Product {
   longDescription: string;
   image: string;
   alt: string;
-  // Change features to an array of objects
   features: { name: string; icon: string }[];
 }
 
@@ -24,28 +22,28 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
     alt: "A person using a VR headset for physical therapy",
     features: [
-      // Update each feature to be an object with name and icon
-      { name: "Personalized Therapy Plans", icon: "ClipboardCheck" }, // Example Lucide icon name
+      { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
       { name: "Gamified Exercises for High Retention", icon: "Gamepad" },
       { name: "Real-time Performance Analytics", icon: "BarChart" },
       { name: "Safe, Controlled Virtual Environments", icon: "ShieldCheck" },
     ],
   },
+  // MODIFIED PRODUCT: Changed from Medical Simulations to Virtual Tours
   {
-    slug: "interactive-medical-simulations",
-    title: "Interactive Medical Simulations",
+    slug: "virtual-expeditions",
+    title: "Immersive Virtual Expeditions",
     description:
-      "Advanced medical training simulations using extended reality and artificial intelligence.",
+      "Explore the world from anywhere with our breathtakingly realistic virtual tours and trips.",
     longDescription:
-      "We provide hyper-realistic medical training simulations that allow healthcare professionals to practice complex procedures in a risk-free environment, enhancing surgical skills and decision-making.",
+      "Step into breathtakingly realistic virtual environments. Our XR platform allows users to explore famous landmarks, visit potential properties, or tour cultural heritage sites from anywhere in the world, offering an unparalleled sense of presence and discovery.",
     image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
-    alt: "A doctor viewing a digital medical interface",
+      "https://images.unsplash.com/photo-1528543606781-2f6e6857f318?auto=format&fit=crop&w=800&q=80",
+    alt: "A person looking at a world map, planning a virtual trip",
     features: [
-      { name: "Realistic Anatomical Models", icon: "Brain" },
-      { name: "Haptic Feedback for Tactile Learning", icon: "Hand" },
-      { name: "Surgical Skill Development Modules", icon: "Stethoscope" },
-      { name: "Team-based Training Scenarios", icon: "Users" },
+      { name: "High-Fidelity 360° Environments", icon: "Camera" },
+      { name: "Interactive Guided Tours", icon: "Map" },
+      { name: "Real Estate & Hospitality Showcases", icon: "Home" },
+      { name: "Cultural Heritage Preservation", icon: "Landmark" },
     ],
   },
   {
@@ -96,6 +94,24 @@ export const products: Product[] = [
       { name: "Virtual Science Lab Experiments", icon: "FlaskConical" },
       { name: "Collaborative Learning Spaces", icon: "Users" },
       { name: "Curriculum-aligned Content", icon: "BookOpen" },
+    ],
+  },
+  //  PRODUCT: Game Development
+  {
+    slug: "game-development",
+    title: "Game Development",
+    description:
+      "Engaging and immersive game development services using the latest XR and AI technologies.",
+    longDescription:
+      "We craft unforgettable gaming experiences by blending creative storytelling with cutting-edge XR and AI technology. From concept to launch, our team builds immersive worlds and intelligent gameplay that captivate players.",
+    image:
+      "https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=800&q=80",
+    alt: "A game developer working on a 3D model on a computer",
+    features: [
+      { name: "Cross-Platform XR Development", icon: "Laptop" },
+      { name: "AI-Powered NPCs & Mechanics", icon: "BrainCircuit" },
+      { name: "Stunning Visuals & Art Direction", icon: "Paintbrush" },
+      { name: "Multiplayer & Social Integration", icon: "Users" },
     ],
   },
 ];
