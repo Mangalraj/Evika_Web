@@ -185,7 +185,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-primary mb-6"
           >
-            Our Partners
+            Our Valued Partners
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -194,22 +194,60 @@ const About = () => {
             viewport={{ once: true }}
             className="text-foreground max-w-4xl mx-auto mb-12"
           >
-            Ready to accelerate digital transformation in healthcare, education, or enterprise? Connect with our team to explore how our XR and AI-driven solutions can elevate your organization's impact, learning, and engagement.
+            We are proud to collaborate with leading organizations to drive innovation and impact across industries.
           </motion.p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="aspect-square bg-muted rounded-2xl flex items-center justify-center"
-              >
-                <span className="text-muted-foreground">Logo {i}</span>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {/* Partner Logo 1 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
+            >
+              {/* Replace with your first partner logo */}
+              <img src="/images/partner-logo-1.png" alt="Partner Logo 1" className="max-h-full max-w-full object-contain" />
+            </motion.div>
+
+            {/* Partner Logo 2 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
+            >
+              {/* Replace with your second partner logo */}
+              <img src="/images/partner-logo-2.png" alt="Partner Logo 2" className="max-h-full max-w-full object-contain" />
+            </motion.div>
+
+            {/* Partner Logo 3 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
+            >
+              {/* Replace with your third partner logo */}
+              <img src="/images/partner-logo-3.png" alt="Partner Logo 3" className="max-h-full max-w-full object-contain" />
+            </motion.div>
+
+            {/* "Become a Partner" block */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-primary rounded-2xl flex flex-col items-center justify-center p-4 text-primary-foreground shadow-md hover:shadow-xl transition-shadow cursor-pointer group"
+            >
+              <h3 className="text-xl font-bold mb-2 group-hover:underline">Become a Partner</h3>
+              <p className="text-sm text-center">Join us in shaping the future of XR & AI innovation.</p>
+              <a href="/contact" className="mt-4 text-white hover:text-white/80 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>
