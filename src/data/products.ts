@@ -28,7 +28,7 @@ export const products: Product[] = [
       { name: "Safe, Controlled Virtual Environments", icon: "ShieldCheck" },
     ],
   },
-  // MODIFIED PRODUCT: Changed from Medical Simulations to Virtual Tours
+  // Virtual Tours
   {
     slug: "virtual-expeditions",
     title: "Immersive Virtual Expeditions",
