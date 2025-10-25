@@ -11,7 +11,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-// Import the Download icon
 import {
   ArrowLeft,
   Check,
@@ -35,7 +34,7 @@ import {
   Globe,
   FlaskConical,
   BookOpen,
-  Download, // Added icon
+  Download,
 } from "lucide-react";
 import { products } from "@/data/products";
 
@@ -81,7 +80,7 @@ const ProductDetailPage = () => {
     );
   }
 
-  // Define a placeholder path for the brochure
+  // Path for the brochure PDF in your /public folder
   const brochurePath = `/brochures/${product.slug}-brochure.pdf`;
 
   return (
@@ -99,23 +98,6 @@ const ProductDetailPage = () => {
             >
               {product.title}
             </motion.h1>
-
-            {/* --- ADDED DOWNLOAD BUTTON --- */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-8"
-            >
-              <Button asChild size="lg">
-                <a href={brochurePath} download>
-                  <Download className="mr-2 h-5 w-5" />
-                  Download Brochure
-                </a>
-              </Button>
-            </motion.div>
-            {/* --- END OF ADDED BUTTON --- */}
-
           </div>
         </section>
 
@@ -140,13 +122,28 @@ const ProductDetailPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
+                className="flex flex-col h-full" // Added for layout
               >
-                <h2 className="text-3xl font-bold text-foreground mb-4">
-                  Overview
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  {product.longDescription}
-                </p>
+                <div className="flex-grow">
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
+                    Overview
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {product.longDescription}
+                  </p>
+                </div>
+
+                {/* --- DOWNLOAD BUTTON MOVED HERE --- */}
+                <div className="mt-8 flex justify-end">
+                  <Button asChild size="lg">
+                    <a href={brochurePath} download>
+                      <Download className="mr-2 h-5 w-5" />
+                      Download Brochure
+                    </a>
+                  </Button>
+                </div>
+                {/* --- END OF BUTTON --- */}
+
               </motion.div>
             </div>
           </div>
@@ -210,30 +207,6 @@ const ProductDetailPage = () => {
             </motion.div>
           </div>
         </section>
-
-        {/* --- ADDED BROCHURE PDF VIEWER SECTION --- */}
-        <section className="py-20 px-6 bg-secondary">
-          <div className="container mx-auto text-center">
-            <h2 className="text-4xl font-bold text-primary mb-12">
-              Product Brochure
-            </h2>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg"
-            >
-              <iframe
-                src={brochurePath}
-                className="w-full aspect-[4/5] md:aspect-video" // Responsive aspect ratio
-                title={`${product.title} Brochure`}
-              ></iframe>
-            </motion.div>
-          </div>
-        </section>
-        {/* --- END OF ADDED SECTION --- */}
-
       </main>
 
       {/* Floating "Back to Products" Button with Tooltip */}
