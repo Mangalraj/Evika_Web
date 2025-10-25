@@ -133,7 +133,7 @@ const ProductDetailPage = () => {
                   </p>
                 </div>
 
-                {/* --- DOWNLOAD BUTTON MOVED HERE --- */}
+                {/* --- DOWNLOAD BUTTON --- */}
                 <div className="mt-8 flex justify-end">
                   <Button asChild size="lg">
                     <a href={brochurePath} download>
