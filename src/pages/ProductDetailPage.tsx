@@ -81,7 +81,7 @@ const ProductDetailPage = () => {
   }
 
   // Path for the brochure PDF in your /public folder
-  const brochurePath = `/brochures/${product.slug}-brochure.pdf`;
+  const brochurePath = `/Pruthvi_resume_2__Copy_.pdf`;
 
   return (
     <div className="min-h-screen bg-background">
