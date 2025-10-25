@@ -12,6 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
+  // Icons
   ArrowLeft,
   Check,
   Play,
@@ -35,12 +36,20 @@ import {
   FlaskConical,
   BookOpen,
   Download,
+  Camera,
+  Map,
+  Home,
+  Landmark,
+  Laptop,
+  BrainCircuit,
+  Paintbrush,
 } from "lucide-react";
 import { products } from "@/data/products";
 
 // A utility function to get the Lucide icon component by its string name
 const getLucideIcon = (iconName: string) => {
   const icons: { [key: string]: React.ElementType } = {
+    // Existing Icons
     ClipboardCheck,
     Gamepad,
     BarChart,
@@ -60,8 +69,16 @@ const getLucideIcon = (iconName: string) => {
     Globe,
     FlaskConical,
     BookOpen,
+    // --- NEW ICONS MAPPED HERE ---
+    Camera,
+    Map,
+    Home,
+    Landmark,
+    Laptop,
+    BrainCircuit,
+    Paintbrush,
   };
-  return icons[iconName] || Check;
+  return icons[iconName] || Check; // Fallback to a check icon if not found
 };
 
 const ProductDetailPage = () => {
@@ -80,8 +97,9 @@ const ProductDetailPage = () => {
     );
   }
 
-  // Path for the brochure PDF in your /public folder
-  const brochurePath = `/Pruthvi_resume_2__Copy_.pdf`;
+  // --- DYNAMIC BROCHURE PATH ---
+  // This now creates a unique path for each product's PDF
+  const brochurePath = `/brochures/${product.slug}-brochure.pdf`;
 
   return (
     <div className="min-h-screen bg-background">
@@ -122,7 +140,7 @@ const ProductDetailPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="flex flex-col h-full" // Added for layout
+                className="flex flex-col h-full"
               >
                 <div className="flex-grow">
                   <h2 className="text-3xl font-bold text-foreground mb-4">
@@ -133,7 +151,7 @@ const ProductDetailPage = () => {
                   </p>
                 </div>
 
-                {/* --- DOWNLOAD BUTTON --- */}
+                {/* --- DOWNLOAD BUTTON (Now Dynamic) --- */}
                 <div className="mt-8 flex justify-end">
                   <Button asChild size="lg">
                     <a href={brochurePath} download>
@@ -142,14 +160,12 @@ const ProductDetailPage = () => {
                     </a>
                   </Button>
                 </div>
-                {/* --- END OF BUTTON --- */}
-
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Features Section (Will now show all icons correctly) */}
         <section className="py-20 px-6 bg-secondary">
           <div className="container mx-auto">
             <h2 className="text-4xl font-bold text-primary mb-12 text-center">
