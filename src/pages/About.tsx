@@ -185,7 +185,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-primary mb-6"
           >
-            Partner With Evika Innovations
+            Our Partners
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
