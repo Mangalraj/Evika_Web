@@ -12,6 +12,7 @@ const Home = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
+  // --- UPDATED PROJECTS ARRAY ---
   const projects = [
     {
       title: "XR Rehabilitation for Locomotory Disabilities",
@@ -20,10 +21,10 @@ const Home = () => {
       alt: "VR Rehabilitation"
     },
     {
-      title: "Interactive Medical Simulations",
-      description: "Advanced medical training simulations using extended reality and artificial intelligence",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
-      alt: "Medical Simulations"
+      title: "Immersive Virtual Expeditions",
+      description: "Explore the world from anywhere with our breathtakingly realistic virtual tours and trips.",
+      image: "https://images.unsplash.com/photo-1528543606781-2f6e6857f318?auto=format&fit=crop&w=800&q=80",
+      alt: "Virtual Expeditions"
     },
     {
       title: "Digital Twin Technology",
@@ -42,6 +43,12 @@ const Home = () => {
       description: "Transform education with our immersive XR learning platform",
       image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
       alt: "Educational Platform"
+    },
+    {
+      title: "Game Development",
+      description: "Engaging and immersive game development services using the latest XR and AI technologies.",
+      image: "https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=800&q=80",
+      alt: "Game Development"
     }
   ];
 
@@ -133,7 +140,7 @@ const Home = () => {
       {/* About Section */}
       <section className="bg-secondary py-20 px-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-primary opacity-20 transform skew-x-12 translate-x-1/4"></div>
-        
+
         <div className="container mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -210,17 +217,17 @@ const Home = () => {
               {/* This div is the container for the animation */}
               <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl">
                 {/* Glowing Orb 1 */}
-                <div 
+                <div
                   className="absolute w-48 h-48 bg-primary/20 rounded-full filter blur-2xl"
                   style={{ animation: 'move-orb-1 15s infinite ease-in-out' }}
                 />
                 {/* Glowing Orb 2 */}
-                <div 
+                <div
                   className="absolute w-40 h-40 bg-purple-500/20 rounded-full filter blur-2xl"
                   style={{ animation: 'move-orb-2 18s infinite ease-in-out -4s' }}
                 />
                 {/* Glowing Orb 3 */}
-                <div 
+                <div
                   className="absolute w-32 h-32 bg-teal-500/20 rounded-full filter blur-2xl"
                   style={{ animation: 'move-orb-3 12s infinite ease-in-out -2s' }}
                 />
