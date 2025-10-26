@@ -101,17 +101,18 @@ const Home = () => {
                       </Button>
                     </motion.div>
 
+                    {/* === MODIFIED IMAGE CONTAINER === */}
                     <motion.div
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
-                      className="relative h-100"
+                      className="relative h-96"  // Set a fixed height for the container
                     >
-                      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+                      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden h-full">
                         <img
                           src={project.image}
                           alt={project.alt}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain" // Use object-contain to fit the image
                         />
                       </div>
                     </motion.div>
