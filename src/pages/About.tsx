@@ -219,7 +219,7 @@ const About = () => {
               className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
             >
               {/* Replace with your second partner logo */}
-              <img src="/images/partner-logo-2.png" alt="Partner Logo 2" className="max-h-full max-w-full object-contain" />
+              <img src="https://www.healthtechalpha.com/_next/image?url=https%3A%2F%2Fcdn.healthtechalpha.com%2Fstatic%2Fstartup_data_images%2F107455.webp&w=1920&q=75" />
             </motion.div>
 
             {/* Partner Logo 3 */}
