@@ -11,7 +11,7 @@ import { products } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea"; // --- NEW: Import Textarea ---
+import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -52,12 +52,11 @@ const ProductDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const product = products.find((p) => p.slug === slug);
 
-  // --- MODIFIED: Updated form state ---
   const [formData, setFormData] = useState({ name: "", email: "", company: "", reason: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false); // --- NEW: Track success state
+  const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
 
   if (!product) {
     return (
@@ -71,13 +70,11 @@ const ProductDetailPage = () => {
     );
   }
 
-  // Handle both input and textarea changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // Handle form submission
   const handleBrochureRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -99,9 +96,8 @@ const ProductDetailPage = () => {
         throw new Error(result.message || "An error occurred.");
       }
       
-      // --- MODIFIED: On success, show the success message ---
       setIsSubmissionSuccessful(true);
-      setFormData({ name: "", email: "", company: "", reason: "" }); // Reset form
+      setFormData({ name: "", email: "", company: "", reason: "" });
 
     } catch (error: any) {
       setFormError(error.message || "Failed to submit request. Please try again.");
@@ -110,11 +106,10 @@ const ProductDetailPage = () => {
     }
   };
   
-  // Reset success state when modal is closed
   const handleModalOpenChange = (open: boolean) => {
     setIsModalOpen(open);
     if (!open) {
-      setTimeout(() => setIsSubmissionSuccessful(false), 300); // Delay reset to allow closing animation
+      setTimeout(() => setIsSubmissionSuccessful(false), 300);
     }
   };
 
@@ -167,7 +162,6 @@ const ProductDetailPage = () => {
                 </div>
 
                 <div className="mt-8 flex justify-end">
-                  {/* --- MODIFIED: Dialog now handles success state --- */}
                   <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
                     <DialogTrigger asChild>
                       <Button size="lg">
@@ -177,7 +171,6 @@ const ProductDetailPage = () => {
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[480px]">
                       {isSubmissionSuccessful ? (
-                        // --- NEW: Success Message View ---
                         <div>
                           <DialogHeader>
                             <DialogTitle className="text-center text-2xl">Thank You!</DialogTitle>
@@ -193,7 +186,6 @@ const ProductDetailPage = () => {
                           </DialogFooter>
                         </div>
                       ) : (
-                        // --- EXISTING: Form View ---
                         <form onSubmit={handleBrochureRequest}>
                           <DialogHeader>
                             <DialogTitle>Request the Brochure</DialogTitle>
@@ -214,7 +206,6 @@ const ProductDetailPage = () => {
                               <Label htmlFor="company" className="text-right">Company</Label>
                               <Input id="company" value={formData.company} onChange={handleInputChange} className="col-span-3" placeholder="(Optional)"/>
                             </div>
-                            {/* --- NEW: 'Reason for Request' Field --- */}
                             <div className="grid grid-cols-4 items-start gap-4 pt-2">
                                 <Label htmlFor="reason" className="text-right pt-2">Purpose</Label>
                                 <Textarea id="reason" value={formData.reason} onChange={handleInputChange} className="col-span-3" placeholder="e.g., Evaluating for a project, academic research, etc." required />
@@ -242,18 +233,89 @@ const ProductDetailPage = () => {
 
         {/* Features Section */}
         <section className="py-20 px-6 bg-secondary">
-            {/*... (rest of the section remains the same) ...*/}
+          <div className="container mx-auto">
+            <h2 className="text-4xl font-bold text-primary mb-12 text-center">
+              Key Features
+            </h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {product.features.map((feature, index) => {
+                const IconComponent = getLucideIcon(feature.icon);
+                return (
+                  <motion.div
+                    key={feature.name}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="text-center p-6 bg-background rounded-xl shadow-md"
+                  >
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <IconComponent className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {feature.name}
+                    </h3>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
         {/* Demo Video Section */}
         <section className="py-20 px-6 bg-background">
-            {/*... (rest of the section remains the same) ...*/}
+          <div className="container mx-auto text-center">
+            <h2 className="text-4xl font-bold text-primary mb-12">
+              Watch it in Action
+            </h2>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-muted rounded-3xl aspect-video flex items-center justify-center max-w-4xl mx-auto cursor-pointer group shadow-lg"
+            >
+              <div className="text-center">
+                <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/30 transition-all duration-300 transform group-hover:scale-110">
+                  <Play
+                    className="w-12 h-12 text-primary"
+                    fill="currentColor"
+                  />
+                </div>
+                <p className="text-muted-foreground font-semibold">
+                  Play Demo Video
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </section>
       </main>
 
-      {/* Floating "Back to Products" Button */}
+      {/* Floating "Back to Products" Button with Tooltip */}
       <TooltipProvider>
-        {/*... (rest of the component remains the same) ...*/}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
+              className="fixed top-20 right-8 z-50"
+            >
+              <Button
+                asChild
+                size="icon"
+                className="h-14 w-14 rounded-full shadow-lg"
+              >
+                <Link to="/products" aria-label="Back to All Products">
+                  <ArrowLeft className="h-6 w-6" />
+                </Link>
+              </Button>
+            </motion.div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Back to All Products</p>
+          </TooltipContent>
+        </Tooltip>
       </TooltipProvider>
 
       <Footer />
