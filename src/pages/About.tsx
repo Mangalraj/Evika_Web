@@ -207,7 +207,7 @@ const About = () => {
               className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
             >
               {/* Replace with your first partner logo */}
-              <img src="/images/partner-logo-1.png" alt="Partner Logo 1" className="max-h-full max-w-full object-contain" />
+              <img src="/hts_logo_1.png" />
             </motion.div>
 
             {/* Partner Logo 2 */}
@@ -231,7 +231,7 @@ const About = () => {
               className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
             >
               {/* Replace with your third partner logo */}
-              <img src="/images/partner-logo-3.png" alt="Partner Logo 3" className="max-h-full max-w-full object-contain" />
+              <img src="/logo3.jpg" />
             </motion.div>
 
             {/* "Become a Partner" block */}
