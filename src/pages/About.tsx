@@ -116,7 +116,7 @@ const About = () => {
             >
               <div className="aspect-[3/4] bg-muted">
                 <img
-                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80"
+                  src="/image_2_person"
                   alt="Mr Antony Arul Selvaraj"
                   className="w-full h-full object-cover"
                 />
