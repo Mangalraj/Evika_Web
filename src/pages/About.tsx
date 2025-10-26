@@ -96,7 +96,7 @@ const About = () => {
             >
               <div className="aspect-[3/4] bg-muted">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+                  src="https://www.gitam.edu/sites/default/files/faculty/700614_1743676506.webp"
                   alt="Dr. Mangalraj"
                   className="w-full h-full object-cover"
                 />
