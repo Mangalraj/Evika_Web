@@ -105,7 +105,7 @@ const Home = () => {
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
-                      className="relative h-96"
+                      className="relative h-100"
                     >
                       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
                         <img
