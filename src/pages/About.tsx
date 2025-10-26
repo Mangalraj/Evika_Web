@@ -222,7 +222,7 @@ const About = () => {
               className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
             >
               <img
-                src="https://www.healthtechalpha.com/_next/image?url=https%3A%2F%2Fcdn.healthtechalpha.com%2Fstatic%2Fstartup_data_images%2F107455.webp&w=1920&q=75"
+                src="https://static.wixstatic.com/media/5d1736_acdaa4af868d426085e12932722461fe~mv2.png/v1/fill/w_336,h_334,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Copy%20of%20AGSRT%20LOGO%20(13).png"
                 alt="Health Tech Alpha Logo"
                 className="w-full h-full object-contain"
               />
