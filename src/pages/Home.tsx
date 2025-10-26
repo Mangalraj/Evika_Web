@@ -12,7 +12,6 @@ const Home = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
-  // --- PROJECTS ARRAY WITH UPDATED SECOND IMAGE ---
   const projects = [
     {
       title: "XR Rehabilitation for Locomotory Disabilities",
@@ -23,7 +22,7 @@ const Home = () => {
     {
       title: "Immersive Virtual Expeditions",
       description: "Explore the world from anywhere with our breathtakingly realistic virtual tours and trips.",
-      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80", // Updated image
       alt: "Virtual Expeditions"
     },
     {
@@ -101,18 +100,17 @@ const Home = () => {
                       </Button>
                     </motion.div>
 
-                    {/* === MODIFIED IMAGE CONTAINER === */}
                     <motion.div
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
-                      className="relative h-96"  // Fixed height for the container
+                      className="relative h-96"
                     >
                       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden h-full">
                         <img
                           src={project.image}
                           alt={project.alt}
-                          className="w-full h-full object-cover" // Use object-cover to FILL the container
+                          className="w-full h-full object-cover"
                         />
                       </div>
                     </motion.div>
@@ -180,7 +178,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* === FINAL CALL TO ACTION (CTA) SECTION START === */}
+      {/* === FINAL CALL TO ACTION (CTA) SECTION START - WITH VIDEO === */}
       <section className="py-20 px-6 bg-background">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center bg-secondary p-8 sm:p-12 rounded-3xl border-2 border-primary/30">
@@ -207,32 +205,25 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* Right Column: Interactive Graphic */}
+            {/* Right Column: Interactive Graphic (now with video) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="relative h-64 md:h-full w-full"
+              className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl" // Added flex for centering
             >
-              {/* This div is the container for the animation */}
-              <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl">
-                {/* Glowing Orb 1 */}
-                <div
-                  className="absolute w-48 h-48 bg-primary/20 rounded-full filter blur-2xl"
-                  style={{ animation: 'move-orb-1 15s infinite ease-in-out' }}
-                />
-                {/* Glowing Orb 2 */}
-                <div
-                  className="absolute w-40 h-40 bg-purple-500/20 rounded-full filter blur-2xl"
-                  style={{ animation: 'move-orb-2 18s infinite ease-in-out -4s' }}
-                />
-                {/* Glowing Orb 3 */}
-                <div
-                  className="absolute w-32 h-32 bg-teal-500/20 rounded-full filter blur-2xl"
-                  style={{ animation: 'move-orb-3 12s infinite ease-in-out -2s' }}
-                />
-              </div>
+              {/* Video Element for Logo Animation */}
+              <video
+                src="/logo_animation.mp4" 
+                autoPlay
+                loop
+                muted
+                playsInline // Essential for autoplay on mobile browsers
+                className="w-full h-full object-cover rounded-2xl" // Ensures video fills the space
+              >
+                Your browser does not support the video tag.
+              </video>
             </motion.div>
           </div>
         </div>
