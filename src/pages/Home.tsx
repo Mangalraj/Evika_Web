@@ -12,7 +12,7 @@ const Home = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
-  // --- UPDATED PROJECTS ARRAY ---
+  // --- PROJECTS ARRAY WITH UPDATED SECOND IMAGE ---
   const projects = [
     {
       title: "XR Rehabilitation for Locomotory Disabilities",
@@ -23,7 +23,7 @@ const Home = () => {
     {
       title: "Immersive Virtual Expeditions",
       description: "Explore the world from anywhere with our breathtakingly realistic virtual tours and trips.",
-      image: "https://images.unsplash.com/photo-1528543606781-2f6e6857f318?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
       alt: "Virtual Expeditions"
     },
     {
@@ -106,13 +106,13 @@ const Home = () => {
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
-                      className="relative h-96"  // Set a fixed height for the container
+                      className="relative h-96"  // Fixed height for the container
                     >
                       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden h-full">
                         <img
                           src={project.image}
                           alt={project.alt}
-                          className="w-full h-full object-contain" // Use object-contain to fit the image
+                          className="w-full h-full object-cover" // Use object-cover to FILL the container
                         />
                       </div>
                     </motion.div>
