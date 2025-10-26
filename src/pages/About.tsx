@@ -176,90 +176,90 @@ const About = () => {
       </section>
 
       {/* Partner Section */}
-<section className="py-20 px-6 bg-secondary">
-  <div className="container mx-auto text-center">
-    <motion.h2
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      className="text-4xl md:text-5xl font-bold text-primary mb-6"
-    >
-      Our Valued Partners
-    </motion.h2>
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      viewport={{ once: true }}
-      className="text-foreground max-w-4xl mx-auto mb-12"
-    >
-      We are proud to collaborate with leading organizations to drive innovation and impact across industries.
-    </motion.p>
+      <section className="py-20 px-6 bg-secondary">
+        <div className="container mx-auto text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-primary mb-6"
+          >
+            Our Valued Partners
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-foreground max-w-4xl mx-auto mb-12"
+          >
+            We are proud to collaborate with leading organizations to drive innovation and impact across industries.
+          </motion.p>
 
-    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-      {/* Partner Logo 1 */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        viewport={{ once: true }}
-        className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
-      >
-        <img
-          src="/hts_logo_1.png"
-          alt="HTS Logo"
-          className="w-full h-full object-contain" {/* <-- ADDED CLASSES HERE */}
-        />
-      </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {/* Partner Logo 1 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
+            >
+              <img
+                src="/hts_logo_1.png"
+                alt="HTS Logo"
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
 
-      {/* Partner Logo 2 */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        viewport={{ once: true }}
-        className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
-      >
-        <img
-          src="https://www.healthtechalpha.com/_next/image?url=https%3A%2F%2Fcdn.healthtechalpha.com%2Fstatic%2Fstartup_data_images%2F107455.webp&w=1920&q=75"
-          alt="Health Tech Alpha Logo"
-          className="w-full h-full object-contain" {/* <-- ADDED CLASSES HERE */}
-        />
-      </motion.div>
+            {/* Partner Logo 2 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
+            >
+              <img
+                src="https://www.healthtechalpha.com/_next/image?url=https%3A%2F%2Fcdn.healthtechalpha.com%2Fstatic%2Fstartup_data_images%2F107455.webp&w=1920&q=75"
+                alt="Health Tech Alpha Logo"
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
 
-      {/* Partner Logo 3 */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        viewport={{ once: true }}
-        className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
-      >
-        <img
-          src="/logo3.jpg"
-          alt="Partner Logo 3"
-          className="w-full h-full object-contain" {/* <-- ADDED CLASSES HERE */}
-        />
-      </motion.div>
+            {/* Partner Logo 3 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-background rounded-2xl flex items-center justify-center p-4 shadow-md hover:shadow-xl transition-shadow"
+            >
+              <img
+                src="/logo3.jpg"
+                alt="Partner Logo 3"
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
 
-      {/* "Become a Partner" block */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="aspect-video bg-primary rounded-2xl flex flex-col items-center justify-center p-4 text-primary-foreground shadow-md hover:shadow-xl transition-shadow cursor-pointer group"
-      >
-        <h3 className="text-xl font-bold mb-2 group-hover:underline">Become a Partner</h3>
-        <p className="text-sm text-center">Join us in shaping the future of XR & AI innovation.</p>
-        <a href="/contact" className="mt-4 text-white hover:text-white/80 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-      </motion.div>
-    </div>
-  </div>
-</section>
+            {/* "Become a Partner" block */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="aspect-video bg-primary rounded-2xl flex flex-col items-center justify-center p-4 text-primary-foreground shadow-md hover:shadow-xl transition-shadow cursor-pointer group"
+            >
+              <h3 className="text-xl font-bold mb-2 group-hover:underline">Become a Partner</h3>
+              <p className="text-sm text-center">Join us in shaping the future of XR & AI innovation.</p>
+              <a href="/contact" className="mt-4 text-white hover:text-white/80 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
