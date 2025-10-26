@@ -215,7 +215,7 @@ const Home = () => {
             >
               {/* Video Element for Logo Animation */}
               <video
-                src="/logo_animation.mp4" 
+                src="/logo_aniamtion.mp4" 
                 autoPlay
                 loop
                 muted
