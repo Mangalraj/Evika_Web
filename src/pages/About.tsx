@@ -116,7 +116,7 @@ const About = () => {
             </motion.div>
 
              <motion.a
-  href="https://www.linkedin.com/in/syed-taha-XXXXXX/"
+  href="https://www.linkedin.com/in/syed-taha-4aa81a29b/"
   target="_blank"
   rel="noopener noreferrer"
   title="View LinkedIn Profile"
