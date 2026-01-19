@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/Navbar"; // Adjusted import based on standard practices, change back if default export
+// REMOVED: Unused imports (Input, Textarea) to prevent build errors
+import Navbar from "@/components/Navbar"; // FIXED: Changed back to default import
 import Footer from "@/components/Footer";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -10,33 +11,28 @@ const Home = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
-  // UPDATED: The 4 specific products with curated content and mapped images
   const projects = [
     {
       title: "Vita Verse",
       description: "Play Your Way To Heal. A gamified XR rehabilitation ecosystem designed to make physical therapy engaging, measurable, and effective for locomotory disabilities.",
-      // Used the original Rehab image
       image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
       alt: "Vita Verse Rehabilitation"
     },
     {
       title: "Immersa",
       description: "Redefining brand presence with Advanced Digital Advertising. We use cutting-edge Holographic Projection to create attention-grabbing, 3D marketing experiences.",
-      // Used the Enterprise/Tech image for a professional advertising look
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       alt: "Immersa Holographic Ads"
     },
     {
       title: "ChronosVR",
       description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
-      // Used the original Expedition/Travel image
       image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
       alt: "ChronosVR Heritage Tours"
     },
     {
       title: "SyncLathe",
       description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
-      // Used the original Digital Twin/Sci-fi image
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
       alt: "SyncLathe Digital Twin"
     }
@@ -63,7 +59,7 @@ const Home = () => {
             setApi={setApi}
             plugins={[
               Autoplay({
-                delay: 5000, // Increased slightly to give time to read the new descriptions
+                delay: 5000,
               }),
             ]}
             opts={{
@@ -169,7 +165,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* === FINAL CALL TO ACTION (CTA) SECTION START - WITH VIDEO === */}
+      {/* CTA Section */}
       <section className="py-20 px-6 bg-background">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center bg-secondary p-8 sm:p-12 rounded-3xl border-2 border-primary/30">
@@ -196,7 +192,7 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* Right Column: Interactive Graphic (now with video) */}
+            {/* Right Column: Video */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -204,9 +200,8 @@ const Home = () => {
               viewport={{ once: true }}
               className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl"
             >
-              {/* Video Element for Logo Animation */}
               <video
-                src="/logo_aniamtion.mp4" 
+                src="/logo_animation.mp4" 
                 autoPlay
                 loop
                 muted
