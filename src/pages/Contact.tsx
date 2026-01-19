@@ -73,10 +73,10 @@ const Contact = () => {
               >
                 <h2 className="text-2xl font-bold text-primary mb-4">Registered Address</h2>
                 <p className="text-foreground mb-6">3/46 B Gandhinagar, Kappalur, Madurai - 625008</p>
-                <h2 className="text-2xl font-bold text-primary mb-4">Corporate Address</h2>
-                <p className="text-foreground">Venture Development centre, GITAM Bengaluru, Nagadenahalli, Karnataka - 561203</p>
+                {/* <h2 className="text-2xl font-bold text-primary mb-4">Corporate Address</h2>
+                <p className="text-foreground">Venture Development centre, GITAM Bengaluru, Nagadenahalli, Karnataka - 561203</p> */}
                 <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Phone Number</h2>
-                <p className="text-foreground">+91 9585985444</p>
+                <p className="text-foreground">+91 6363252306</p>
                 <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Email</h2>
                 <p className="text-foreground">support@evikainnovations.com</p>
               </motion.div>
