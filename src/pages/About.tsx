@@ -94,13 +94,7 @@ const About = () => {
               viewport={{ once: true }}
               className="bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl"
             >
-              <div className="aspect-[3/4] bg-muted">
-                {/* <img
-                  src="https://www.gitam.edu/sites/default/files/faculty/700614_1743676506.webp"
-                  alt="Dr. Mangalraj"
-                  className="w-full h-full object-cover"
-                /> */}
-              </div>
+              
               <div className="p-6 text-center text-primary-foreground">
                 <h3 className="text-xl font-bold mb-1">Dr. Mangalraj</h3>
                 <p className="text-sm">Director - Extended Reality Technology</p>
@@ -114,13 +108,7 @@ const About = () => {
               viewport={{ once: true }}
               className="bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl"
             >
-              <div className="aspect-[3/4] bg-muted">
-                {/* <img
-                  src="/IMG-20260119-WA0000.jpg"
-                  alt="Mr Antony Arul Selvaraj"
-                  className="w-full h-full object-cover"
-                /> */}
-              </div>
+             
               <div className="p-6 text-center text-primary-foreground">
                 <h3 className="text-xl font-bold mb-1">Mr Antony Arul Selvaraj</h3>
                 <p className="text-sm">Director - Cyberspace</p>
