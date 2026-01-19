@@ -209,7 +209,7 @@ const Home = () => {
               className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl"
             >
               <video
-                src="/logo_animation.mp4" 
+                src="/logo_aniamtion.mp4" 
                 autoPlay
                 loop
                 muted
