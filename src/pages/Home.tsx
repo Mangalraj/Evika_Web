@@ -1,36 +1,44 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-// REMOVED: Unused imports (Input, Textarea) to prevent build errors
-import Navbar from "@/components/Navbar"; // FIXED: Changed back to default import
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  
+  const plugin = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false })
+  );
 
   const projects = [
     {
+      slug: "vita-verse",
       title: "Vita Verse",
       description: "Play Your Way To Heal. A gamified XR rehabilitation ecosystem designed to make physical therapy engaging, measurable, and effective for locomotory disabilities.",
-      image: "/vitaVerse-background.png",
+      image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
       alt: "Vita Verse Rehabilitation"
     },
     {
+      slug: "immersa",
       title: "Immersa",
       description: "Redefining brand presence with Advanced Digital Advertising. We use cutting-edge Holographic Projection to create attention-grabbing, 3D marketing experiences.",
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
       alt: "Immersa Holographic Ads"
     },
     {
+      slug: "chronos-vr",
       title: "ChronosVR",
       description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
       image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
       alt: "ChronosVR Heritage Tours"
     },
     {
+      slug: "synclathe",
       title: "SyncLathe",
       description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
@@ -52,20 +60,17 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section with Carousel */}
       <section className="bg-gradient-to-b from-secondary to-background py-20 px-6">
         <div className="container mx-auto">
           <Carousel
             setApi={setApi}
-            plugins={[
-              Autoplay({
-                delay: 5000,
-              }),
-            ]}
+            plugins={[plugin.current]}
             opts={{
               loop: true,
             }}
             className="w-full"
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.reset}
           >
             <CarouselContent>
               {projects.map((project, index) => (
@@ -82,9 +87,11 @@ const Home = () => {
                       <p className="text-lg text-foreground mb-8 leading-relaxed">
                         {project.description}
                       </p>
-                      <Button variant="outline" size="lg">
-                        Know More
-                      </Button>
+                      <Link to={`/products/${project.slug}`}>
+                        <Button variant="outline" size="lg">
+                          Know More
+                        </Button>
+                      </Link>
                     </motion.div>
 
                     <motion.div
@@ -107,7 +114,6 @@ const Home = () => {
             </CarouselContent>
           </Carousel>
 
-          {/* Dots Indicator */}
           <div className="flex justify-center gap-2 mt-8">
             {projects.map((_, index) => (
               <button
@@ -123,7 +129,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section className="bg-secondary py-20 px-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-primary opacity-20 transform skew-x-12 translate-x-1/4"></div>
 
@@ -141,9 +146,11 @@ const Home = () => {
               <p className="text-foreground mb-6 leading-relaxed">
                 Evika Innovations is pioneering digital transformation by integrating extended reality (XR) and artificial intelligence (AI) across healthcare, education, and enterprise sectors. With a mission to unlock human potential through immersive, data-driven solutions, we create impactful innovations such as interactive medical simulations, digital twins, and enterprise training modules. Guided by integrity, collaboration, and continuous learning, our team of experts delivers tailored XR solutions that accelerate recovery, enhance learning outcomes, and elevate performance—driving responsible, ethical, and sustainable transformation.
               </p>
-              <Button variant="outline" size="lg">
-                More About us
-              </Button>
+              <Link to="/about">
+                <Button variant="outline" size="lg">
+                  More About us
+                </Button>
+              </Link>
             </motion.div>
 
             <motion.div
@@ -165,11 +172,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 px-6 bg-background">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center bg-secondary p-8 sm:p-12 rounded-3xl border-2 border-primary/30">
-            {/* Left Column: The Pitch */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -183,16 +188,19 @@ const Home = () => {
                 Let's discuss how our XR and AI solutions can unlock new possibilities and create a competitive advantage for your organization.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Book a Demo
-                </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  Explore Solutions
-                </Button>
+                <a href="mailto:support@evikainnovations.com">
+                  <Button size="lg" className="w-full sm:w-auto">
+                    Book a Demo
+                  </Button>
+                </a>
+                <Link to="/products">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    Explore Solutions
+                  </Button>
+                </Link>
               </div>
             </motion.div>
 
-            {/* Right Column: Video */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -201,7 +209,7 @@ const Home = () => {
               className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl"
             >
               <video
-                src="/logo_aniamtion.mp4" 
+                src="/logo_animation.mp4" 
                 autoPlay
                 loop
                 muted
