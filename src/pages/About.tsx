@@ -114,6 +114,20 @@ const About = () => {
                 <p className="text-sm">Director - Cyberspace</p>
               </div>
             </motion.div>
+
+             <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl"
+            >
+              
+              <div className="p-6 text-center text-primary-foreground">
+                <h3 className="text-xl font-bold mb-1">Syed Taha</h3>
+                <p className="text-sm">Developer - Extended Reality Application</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
