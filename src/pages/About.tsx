@@ -124,7 +124,7 @@ const About = () => {
             >
               
               <div className="p-6 text-center text-primary-foreground">
-                <h3 className="text-xl font-bold mb-1">Syed Taha</h3>
+                <h3 className="text-xl font-bold mb-1">Mr Syed Taha</h3>
                 <p className="text-sm">Extended Reality Application Developer</p>
               </div>
             </motion.div>
@@ -137,7 +137,7 @@ const About = () => {
             >
               
               <div className="p-6 text-center text-primary-foreground">
-                <h3 className="text-xl font-bold mb-1">Pruthviraj K P</h3>
+                <h3 className="text-xl font-bold mb-1">Mr Pruthviraj K P</h3>
                 <p className="text-sm">Extended Reality Application Developer and Web Support</p>
               </div>
             </motion.div>
@@ -150,7 +150,7 @@ const About = () => {
             >
               
               <div className="p-6 text-center text-primary-foreground">
-                <h3 className="text-xl font-bold mb-1">Sai Krishna B</h3>
+                <h3 className="text-xl font-bold mb-1">Mr Sai Krishna B</h3>
                 <p className="text-sm">Extended Reality Application Developer and Graphics Support</p>
               </div>
             </motion.div>
