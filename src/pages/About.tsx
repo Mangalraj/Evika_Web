@@ -103,7 +103,7 @@ const About = () => {
               </div>
               <div className="p-6 text-center text-primary-foreground">
                 <h3 className="text-xl font-bold mb-1">Dr. Mangalraj</h3>
-                <p className="text-sm">Chief Executive Officer</p>
+                <p className="text-sm">Director</p>
               </div>
             </motion.div>
 
