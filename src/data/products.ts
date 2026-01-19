@@ -19,7 +19,7 @@ export const products: Product[] = [
     longDescription:
       "Our immersive XR platform accelerates recovery for patients with locomotory disabilities through engaging, gamified therapy sessions that provide real-time feedback and track progress with high precision.",
     image:
-      "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
+      "/Vita_Verse_d.png",
     alt: "A person using a VR headset for physical therapy",
     features: [
       { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
