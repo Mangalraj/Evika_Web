@@ -15,7 +15,7 @@ const Home = () => {
     {
       title: "Vita Verse",
       description: "Play Your Way To Heal. A gamified XR rehabilitation ecosystem designed to make physical therapy engaging, measurable, and effective for locomotory disabilities.",
-      image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
+      image: "/vitaVerse-background.png",
       alt: "Vita Verse Rehabilitation"
     },
     {
