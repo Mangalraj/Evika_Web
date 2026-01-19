@@ -151,7 +151,7 @@ const About = () => {
               
               <div className="p-6 text-center text-primary-foreground">
                 <h3 className="text-xl font-bold mb-1">Sai Krishna B</h3>
-                <p className="text-sm">Graphics Developer for Extended Reality Application</p>
+                <p className="text-sm">Graphics Design Support for Extended Reality Application</p>
               </div>
             </motion.div>
           </div>
