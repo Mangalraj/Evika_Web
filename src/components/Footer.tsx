@@ -41,9 +41,11 @@ const Footer = () => {
                 </div>
                 <div className="text-left">
                   <p className="font-semibold text-foreground">Mail us</p>
-                  <p className="text-sm text-muted-foreground">
+                  <a href="mailto:support@evikainnovations.com">
+                  <p>
                     support@evikainnovations.com
                   </p>
+                </a>
                 </div>
               </div>
 
