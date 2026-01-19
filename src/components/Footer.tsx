@@ -16,23 +16,25 @@ const Footer = () => {
             <h3 className="text-2xl font-bold text-primary mb-6">
               Get in Touch
             </h3>
-            {/* THIS IS THE CORRECTED DIV */}
+            
             <div className="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+              {/* Phone Section */}
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-primary" />
-               <div className="text-left">
-  <p className="font-semibold text-foreground">Call Us</p>
-  {/* Changed to an anchor tag for click-to-call functionality */}
-  <a 
-    href="tel:+916363252306" 
-    className="text-sm text-muted-foreground hover:text-primary transition-colors block"
-  >
-    +91 6363252306
-  </a>
-</div>
+                </div>
+                <div className="text-left">
+                  <p className="font-semibold text-foreground">Call Us</p>
+                  <a 
+                    href="tel:+916363252306" 
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors block"
+                  >
+                    +91 6363252306
+                  </a>
+                </div>
               </div>
 
+              {/* Mail Section */}
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5 text-primary" />
@@ -45,6 +47,7 @@ const Footer = () => {
                 </div>
               </div>
 
+              {/* Address Section */}
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
