@@ -103,7 +103,7 @@ const About = () => {
               </div>
               <div className="p-6 text-center text-primary-foreground">
                 <h3 className="text-xl font-bold mb-1">Dr. Mangalraj</h3>
-                <p className="text-sm">Director</p>
+                <p className="text-sm">Director - Extended Reality Technology</p>
               </div>
             </motion.div>
 
@@ -116,14 +116,14 @@ const About = () => {
             >
               <div className="aspect-[3/4] bg-muted">
                 <img
-                  src="/image_2_person.jpg"
+                  src="/IMG-2026119-WA0000.jpg"
                   alt="Mr Antony Arul Selvaraj"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="p-6 text-center text-primary-foreground">
                 <h3 className="text-xl font-bold mb-1">Mr Antony Arul Selvaraj</h3>
-                <p className="text-sm">Chief Technology Officer</p>
+                <p className="text-sm">Director - Cyberspace</p>
               </div>
             </motion.div>
           </div>
