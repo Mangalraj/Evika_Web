@@ -12,7 +12,7 @@ const Home = () => {
   const [current, setCurrent] = useState(0);
   
   const plugin = useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ delay: 1000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   const projects = [
