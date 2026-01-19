@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import Navbar from "@/components/Navbar";
+import { Navbar } from "@/components/Navbar"; // Adjusted import based on standard practices, change back if default export
 import Footer from "@/components/Footer";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -12,42 +10,35 @@ const Home = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
+  // UPDATED: The 4 specific products with curated content and mapped images
   const projects = [
     {
-      title: "XR Rehabilitation for Locomotory Disabilities",
-      description: "Experience our XR Rehabilitation for Locomotory Disabilities with High Retention",
+      title: "Vita Verse",
+      description: "Play Your Way To Heal. A gamified XR rehabilitation ecosystem designed to make physical therapy engaging, measurable, and effective for locomotory disabilities.",
+      // Used the original Rehab image
       image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
-      alt: "VR Rehabilitation"
+      alt: "Vita Verse Rehabilitation"
     },
     {
-      title: "Immersive Virtual Expeditions",
-      description: "Explore the world from anywhere with our breathtakingly realistic virtual tours and trips.",
-      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80", // Updated image
-      alt: "Virtual Expeditions"
-    },
-    {
-      title: "Digital Twin Technology",
-      description: "Revolutionary digital twin solutions that create virtual replicas of physical systems",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-      alt: "Digital Twin"
-    },
-    {
-      title: "Enterprise Training Modules",
-      description: "Immersive XR training solutions designed for enterprise organizations",
+      title: "Immersa",
+      description: "Redefining brand presence with Advanced Digital Advertising. We use cutting-edge Holographic Projection to create attention-grabbing, 3D marketing experiences.",
+      // Used the Enterprise/Tech image for a professional advertising look
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-      alt: "Enterprise Training"
+      alt: "Immersa Holographic Ads"
     },
     {
-      title: "Educational XR Platform",
-      description: "Transform education with our immersive XR learning platform",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
-      alt: "Educational Platform"
+      title: "ChronosVR",
+      description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
+      // Used the original Expedition/Travel image
+      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+      alt: "ChronosVR Heritage Tours"
     },
     {
-      title: "Game Development",
-      description: "Engaging and immersive game development services using the latest XR and AI technologies.",
-      image: "https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=800&q=80",
-      alt: "Game Development"
+      title: "SyncLathe",
+      description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
+      // Used the original Digital Twin/Sci-fi image
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+      alt: "SyncLathe Digital Twin"
     }
   ];
 
@@ -72,7 +63,7 @@ const Home = () => {
             setApi={setApi}
             plugins={[
               Autoplay({
-                delay: 4000,
+                delay: 5000, // Increased slightly to give time to read the new descriptions
               }),
             ]}
             opts={{
@@ -92,7 +83,7 @@ const Home = () => {
                       <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6">
                         {project.title}
                       </h1>
-                      <p className="text-lg text-foreground mb-8">
+                      <p className="text-lg text-foreground mb-8 leading-relaxed">
                         {project.description}
                       </p>
                       <Button variant="outline" size="lg">
@@ -211,7 +202,7 @@ const Home = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl" // Added flex for centering
+              className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl"
             >
               {/* Video Element for Logo Animation */}
               <video
@@ -219,11 +210,9 @@ const Home = () => {
                 autoPlay
                 loop
                 muted
-                playsInline // Essential for autoplay on mobile browsers
-                className="w-full h-full object-cover rounded-2xl" // Ensures video fills the space
-              >
-                Your browser does not support the video tag.
-              </video>
+                playsInline
+                className="w-full h-full object-cover rounded-2xl"
+              />
             </motion.div>
           </div>
         </div>
