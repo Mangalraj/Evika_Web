@@ -12,15 +12,15 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    slug: "xr-rehabilitation",
-    title: "XR Rehabilitation for Locomotory Disabilities",
+    slug: "vita-verse",
+    title: "Vita Verse",
     description:
-      "Immersive XR therapy with high retention for patients with locomotory disabilities.",
+      "Play Your Way To Heal. A gamified XR rehabilitation ecosystem designed to make physical therapy engaging, measurable, and effective for locomotory disabilities.",
     longDescription:
-      "Our immersive XR platform accelerates recovery for patients with locomotory disabilities through engaging, gamified therapy sessions that provide real-time feedback and track progress with high precision.",
+      "Vita Verse transforms physical therapy into an engaging, gamified experience. Our XR rehabilitation ecosystem is specifically designed for locomotory disabilities, offering personalized exercise plans, real-time feedback, and high-retention gameplay that makes healing fun and measurable.",
     image:
       "/vitaVerse-background.png",
-    alt: "A person using a VR headset for physical therapy",
+    alt: "Patient using Vita Verse XR rehabilitation system",
     features: [
       { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
       { name: "Gamified Exercises for High Retention", icon: "Gamepad" },
@@ -28,90 +28,55 @@ export const products: Product[] = [
       { name: "Safe, Controlled Virtual Environments", icon: "ShieldCheck" },
     ],
   },
-  // Virtual Tours
   {
-    slug: "virtual-expeditions",
-    title: "Immersive Virtual Expeditions",
+    slug: "immersa",
+    title: "Immersa",
     description:
-      "Explore the world from anywhere with our breathtakingly realistic virtual tours and trips.",
+      "Redefining brand presence with Advanced Digital Advertising using Holographic Projection.",
     longDescription:
-      "Step into breathtakingly realistic virtual environments. Our XR platform allows users to explore famous landmarks, visit potential properties, or tour cultural heritage sites from anywhere in the world, offering an unparalleled sense of presence and discovery.",
-    image:
-      "https://images.unsplash.com/photo-1528543606781-2f6e6857f318?auto=format&fit=crop&w=800&q=80",
-    alt: "A person looking at a world map, planning a virtual trip",
-    features: [
-      { name: "High-Fidelity 360° Environments", icon: "Camera" },
-      { name: "Interactive Guided Tours", icon: "Map" },
-      { name: "Real Estate & Hospitality Showcases", icon: "Home" },
-      { name: "Cultural Heritage Preservation", icon: "Landmark" },
-    ],
-  },
-  {
-    slug: "digital-twin-technology",
-    title: "Digital Twin Technology",
-    description:
-      "Revolutionary digital twin solutions that create virtual replicas of physical systems.",
-    longDescription:
-      "Our digital twin solutions create dynamic, virtual replicas of physical assets and systems. This enables predictive maintenance, operational optimization, and scenario testing for complex industrial processes.",
-    image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-    alt: "Abstract digital representation of global connections",
-    features: [
-      { name: "Real-time Data Synchronization", icon: "RefreshCw" },
-      { name: "Predictive Analytics & Maintenance", icon: "Gauge" },
-      { name: "Process & Workflow Optimization", icon: "Workflow" },
-      { name: "Scalable for Complex Systems", icon: "Cloud" },
-    ],
-  },
-  {
-    slug: "enterprise-training-modules",
-    title: "Enterprise Training Modules",
-    description:
-      "Immersive XR training solutions designed for enterprise organizations.",
-    longDescription:
-      "Transform your corporate training with our immersive XR solutions. We create modules for safety training, complex machinery operation, and soft skills development, improving employee performance and retention.",
+      "Immersa elevates your brand with Advanced Digital Advertising using cutting-edge Holographic Projection. We create attention-grabbing, 3D marketing experiences that stop customers in their tracks, offering a futuristic way to visualize products and tell your brand story.",
     image:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-    alt: "A team collaborating around a table with charts",
+    alt: "Holographic advertising display in a modern setting",
     features: [
-      { name: "Hazard Identification Training", icon: "AlertTriangle" },
-      { name: "Equipment Operation Simulation", icon: "Settings" },
-      { name: "Leadership & Communication Skills", icon: "Award" },
-      { name: "Measurable Performance Metrics", icon: "Activity" },
+      { name: "Holographic 3D Projection", icon: "Monitor" },
+      { name: "Interactive Brand Storytelling", icon: "Zap" },
+      { name: "High-Impact Visual Marketing", icon: "Megaphone" },
+      { name: "Futuristic Product Displays", icon: "Box" },
     ],
   },
   {
-    slug: "educational-xr-platform",
-    title: "Educational XR Platform",
-    description: "Transform education with our immersive XR learning platform.",
-    longDescription:
-      "Our platform revolutionizes learning by transforming abstract concepts into tangible, interactive experiences. From virtual science labs to historical explorations, we make education more engaging and effective.",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
-    alt: "A classroom with a teacher pointing to a chalkboard",
-    features: [
-      { name: "Interactive 3D Models & Environments", icon: "Globe" },
-      { name: "Virtual Science Lab Experiments", icon: "FlaskConical" },
-      { name: "Collaborative Learning Spaces", icon: "Users" },
-      { name: "Curriculum-aligned Content", icon: "BookOpen" },
-    ],
-  },
-  //  PRODUCT: Game Development
-  {
-    slug: "game-development",
-    title: "Game Development",
+    slug: "chronos-vr",
+    title: "ChronosVR",
     description:
-      "Engaging and immersive game development services using the latest XR and AI technologies.",
+      "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites.",
     longDescription:
-      "We craft unforgettable gaming experiences by blending creative storytelling with cutting-edge XR and AI technology. From concept to launch, our team builds immersive worlds and intelligent gameplay that captivate players.",
+      "ChronosVR is dedicated to preserving culture and history through high-fidelity Virtual Tours. Our platform allows users to explore heritage sites and tourism destinations from anywhere in the world, offering an immersive, educational journey through time and space.",
     image:
-      "https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=800&q=80",
-    alt: "A game developer working on a 3D model on a computer",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+    alt: "User exploring a virtual heritage site",
     features: [
-      { name: "Cross-Platform XR Development", icon: "Laptop" },
-      { name: "AI-Powered NPCs & Mechanics", icon: "BrainCircuit" },
-      { name: "Stunning Visuals & Art Direction", icon: "Paintbrush" },
-      { name: "Multiplayer & Social Integration", icon: "Users" },
+      { name: "High-Fidelity 360° Tours", icon: "Camera" },
+      { name: "Cultural Heritage Preservation", icon: "Landmark" },
+      { name: "Interactive Historical Guides", icon: "Map" },
+      { name: "Global Remote Exploration", icon: "Globe" },
+    ],
+  },
+  {
+    slug: "synclathe",
+    title: "SyncLathe",
+    description:
+      "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training synchronized with real-world physics.",
+    longDescription:
+      "SyncLathe implies synchronization between the digital model and real-world physics. It is a cutting-edge Digital Twin Technology application designed for Industry support, specifically for CNC Lathe Machines, enabling safe, risk-free training and operational optimization in an Industry 5.0 environment.",
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+    alt: "Digital twin of a CNC machine interface",
+    features: [
+      { name: "Real-time Physics Synchronization", icon: "RefreshCw" },
+      { name: "CNC Lathe Machine Simulation", icon: "Settings" },
+      { name: "Industry 5.0 Training Standards", icon: "Cpu" },
+      { name: "Risk-free Operational Environment", icon: "Shield" },
     ],
   },
 ];
