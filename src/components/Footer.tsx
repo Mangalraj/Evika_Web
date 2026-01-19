@@ -20,14 +20,17 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <Phone className="w-8 h-8 text-primary" />
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-foreground">Call Us</p>
-                  <p className="text-sm text-muted-foreground">
-                    +91 6363252306
-                  </p>
-                </div>
+                  <Phone className="w-5 h-5 text-primary" />
+               <div className="text-left">
+  <p className="font-semibold text-foreground">Call Us</p>
+  {/* Changed to an anchor tag for click-to-call functionality */}
+  <a 
+    href="tel:+916363252306" 
+    className="text-sm text-muted-foreground hover:text-primary transition-colors block"
+  >
+    +91 6363252306
+  </a>
+</div>
               </div>
 
               <div className="flex items-center gap-3">
