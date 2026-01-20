@@ -15,7 +15,6 @@ const Home = () => {
     Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
-  // UPDATED: Added 'imgClass' property to handle specific image fitting
   const projects = [
     {
       slug: "vita-verse",
@@ -23,7 +22,8 @@ const Home = () => {
       description: "Play Your Way To Heal. A gamified XR rehabilitation ecosystem designed to make physical therapy engaging, measurable, and effective for locomotory disabilities.",
       image: "vitaVerse-background.png",
       alt: "Vita Verse Rehabilitation",
-      imgClass: "object-cover" // Fits well as cover
+      imgClass: "object-cover",
+      bgClass: "bg-white" // Light image, white background
     },
     {
       slug: "immersa",
@@ -31,7 +31,8 @@ const Home = () => {
       description: "Redefining brand presence with Advanced Digital Advertising. We use cutting-edge Holographic Projection to create attention-grabbing, 3D marketing experiences.",
       image: "immersaimage.png",
       alt: "Immersa Holographic Ads",
-      imgClass: "object-cover" // Fits well as cover
+      imgClass: "object-cover",
+      bgClass: "bg-white" // Light image, white background
     },
     {
       slug: "chronos-vr",
@@ -39,7 +40,8 @@ const Home = () => {
       description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
       image: "chronosvrimage.png",
       alt: "ChronosVR Heritage Tours",
-      imgClass: "object-contain p-4 bg-gray-50" // UPDATED: Contains image so details aren't cut
+      imgClass: "object-contain", // Fit the image
+      bgClass: "bg-black" // Dark background to blend with image
     },
     {
       slug: "synclathe",
@@ -47,7 +49,8 @@ const Home = () => {
       description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
       image: "synclatheimage.png",
       alt: "SyncLathe Digital Twin",
-      imgClass: "object-contain p-4 bg-gray-50" // UPDATED: Contains image so details aren't cut
+      imgClass: "object-contain", // Fit the image
+      bgClass: "bg-black" // Dark background to blend with image
     }
   ];
 
@@ -105,8 +108,8 @@ const Home = () => {
                       transition={{ duration: 0.6, delay: 0.2 }}
                       className="relative h-96"
                     >
-                      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden h-full flex items-center justify-center">
-                        {/* UPDATED IMAGE TAG */}
+                      {/* UPDATED CONTAINER: Uses project.bgClass instead of hardcoded bg-white */}
+                      <div className={`${project.bgClass} rounded-3xl shadow-2xl overflow-hidden h-full flex items-center justify-center transition-colors duration-300`}>
                         <img
                           src={project.image}
                           alt={project.alt}
