@@ -41,7 +41,7 @@ const Home = () => {
       image: "chronosvrfinaleimage.jpg",
       alt: "ChronosVR Heritage Tours",
       imgClass: "object-contain", // Fit the image
-      // bgClass: "bg-black" // Dark background to blend with image
+      bgClass: "bg-black" // Dark background to blend with image
     },
     {
       slug: "synclathe",
@@ -50,7 +50,7 @@ const Home = () => {
       image: "synclathefinaleimage.jpg",
       alt: "SyncLathe Digital Twin",
       imgClass: "object-contain", // Fit the image
-      // bgClass: "bg-black" // Dark background to blend with image
+      bgClass: "bg-black" // Dark background to blend with image
     }
   ];
 
