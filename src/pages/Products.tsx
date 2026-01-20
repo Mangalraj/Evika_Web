@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { products } from "@/data/products"; // Import your new data file
+import { products } from "@/data/products";
 
 const Products = () => {
   return (
@@ -45,13 +45,15 @@ const Products = () => {
                 viewport={{ once: true }}
                 className="bg-secondary rounded-2xl overflow-hidden flex flex-col group shadow-md hover:shadow-xl transition-shadow"
               >
-                <div className="overflow-hidden">
+                {/* UPDATED LINE BELOW: Added bg-black */}
+                <div className="overflow-hidden bg-black">
                   <img
                     src={product.image}
                     alt={product.alt}
                     className="w-full h-64 object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
+                
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-xl font-bold text-foreground mb-2">
                     {product.title}
