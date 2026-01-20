@@ -27,21 +27,21 @@ const Home = () => {
       slug: "immersa",
       title: "Immersa",
       description: "Redefining brand presence with Advanced Digital Advertising. We use cutting-edge Holographic Projection to create attention-grabbing, 3D marketing experiences.",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
+      image: "immersaimage.png",
       alt: "Immersa Holographic Ads"
     },
     {
       slug: "chronos-vr",
       title: "ChronosVR",
       description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
-      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+      image: "chronosvrimage.png",
       alt: "ChronosVR Heritage Tours"
     },
     {
       slug: "synclathe",
       title: "SyncLathe",
       description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+      image: "synclatheimage.png",
       alt: "SyncLathe Digital Twin"
     }
   ];
