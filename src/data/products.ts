@@ -36,7 +36,7 @@ export const products: Product[] = [
     longDescription:
       "Immersa elevates your brand with Advanced Digital Advertising using cutting-edge Holographic Projection. We create attention-grabbing, 3D marketing experiences that stop customers in their tracks, offering a futuristic way to visualize products and tell your brand story.",
     image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
+      "/immersaimage.png",
     alt: "Holographic advertising display in a modern setting",
     features: [
       { name: "Holographic 3D Projection", icon: "Monitor" },
@@ -53,7 +53,7 @@ export const products: Product[] = [
     longDescription:
       "ChronosVR is dedicated to preserving culture and history through high-fidelity Virtual Tours. Our platform allows users to explore heritage sites and tourism destinations from anywhere in the world, offering an immersive, educational journey through time and space.",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+      "/chronosvrfinaleimage.jpg",
     alt: "User exploring a virtual heritage site",
     features: [
       { name: "High-Fidelity 360° Tours", icon: "Camera" },
@@ -70,7 +70,7 @@ export const products: Product[] = [
     longDescription:
       "SyncLathe implies synchronization between the digital model and real-world physics. It is a cutting-edge Digital Twin Technology application designed for Industry support, specifically for CNC Lathe Machines, enabling safe, risk-free training and operational optimization in an Industry 5.0 environment.",
     image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+      "synclathefinaleimage.jpg",
     alt: "Digital twin of a CNC machine interface",
     features: [
       { name: "Real-time Physics Synchronization", icon: "RefreshCw" },
