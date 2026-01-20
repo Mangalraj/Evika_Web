@@ -29,7 +29,7 @@ const Home = () => {
       slug: "immersa",
       title: "Immersa",
       description: "Redefining brand presence with Advanced Digital Advertising. We use cutting-edge Holographic Projection to create attention-grabbing, 3D marketing experiences.",
-      image: "immersaimage.png",
+      image: "immersafinalimage.png",
       alt: "Immersa Holographic Ads",
       imgClass: "object-cover",
       bgClass: "bg-white" // Light image, white background
