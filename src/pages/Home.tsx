@@ -38,19 +38,19 @@ const Home = () => {
       slug: "chronos-vr",
       title: "ChronosVR",
       description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
-      image: "chronosvrimage.png",
+      image: "chronosvrfinaleimage.jpg",
       alt: "ChronosVR Heritage Tours",
-      imgClass: "object-contain", // Fit the image
-      bgClass: "bg-black" // Dark background to blend with image
+      imgClass: "object-cover", // Fit the image
+      // bgClass: "bg-black" // Dark background to blend with image
     },
     {
       slug: "synclathe",
       title: "SyncLathe",
       description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
-      image: "synclatheimage.png",
+      image: "synclathefinaleimage.jpg",
       alt: "SyncLathe Digital Twin",
-      imgClass: "object-contain", // Fit the image
-      bgClass: "bg-black" // Dark background to blend with image
+      imgClass: "object-cover", // Fit the image
+      // bgClass: "bg-black" // Dark background to blend with image
     }
   ];
 
