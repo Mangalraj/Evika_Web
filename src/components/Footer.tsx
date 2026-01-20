@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -46,22 +46,25 @@ const Footer = () => {
                     className="text-sm text-muted-foreground hover:text-primary transition-colors block"
                     >
                     support@evikainnovations.com
-                </a>
+                  </a>
                 </div>
               </div>
 
-              {/* Address Section */}
+              {/* LinkedIn Section */}
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-primary" />
+                  <Linkedin className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-left">
-                  <p className="font-semibold text-foreground">Find us</p>
-                  <p className="text-sm text-muted-foreground">
-                    Venture Development Centre, GITAM Bengaluru,
-                    <br />
-                    Nagadenahalli, Karnataka - 561203
-                  </p>
+                  <p className="font-semibold text-foreground">Follow us</p>
+                  <a 
+                    href="https://www.linkedin.com/company/evika-innovations/posts/?feedView=all"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors block"
+                  >
+                    Evika Innovations
+                  </a>
                 </div>
               </div>
             </div>
