@@ -64,7 +64,7 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <img
-                src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80"
+                src="/aboutusimage.png"
                 alt="XR & AI Innovation"
                 className="w-full rounded-3xl shadow-2xl"
               />
