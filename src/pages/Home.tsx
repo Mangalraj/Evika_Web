@@ -40,7 +40,7 @@ const Home = () => {
       description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
       image: "chronosvrfinaleimage.jpg",
       alt: "ChronosVR Heritage Tours",
-      imgClass: "object-cover", // Fit the image
+      imgClass: "object-contain", // Fit the image
       // bgClass: "bg-black" // Dark background to blend with image
     },
     {
@@ -49,7 +49,7 @@ const Home = () => {
       description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
       image: "synclathefinaleimage.jpg",
       alt: "SyncLathe Digital Twin",
-      imgClass: "object-cover", // Fit the image
+      imgClass: "object-contain", // Fit the image
       // bgClass: "bg-black" // Dark background to blend with image
     }
   ];
