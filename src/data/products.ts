@@ -19,7 +19,7 @@ export const products: Product[] = [
     longDescription:
       "Vita Verse transforms physical therapy into an engaging, gamified experience. Our XR rehabilitation ecosystem is specifically designed for locomotory disabilities, offering personalized exercise plans, real-time feedback, and high-retention gameplay that makes healing fun and measurable.",
     image:
-      "/vitaVerse-background.png",
+      "/Vita_Verse_d.png",
     alt: "Patient using Vita Verse XR rehabilitation system",
     features: [
       { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
