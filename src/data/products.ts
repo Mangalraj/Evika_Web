@@ -70,7 +70,7 @@ export const products: Product[] = [
     longDescription:
       "SyncLathe implies synchronization between the digital model and real-world physics. It is a cutting-edge Digital Twin Technology application designed for Industry support, specifically for CNC Lathe Machines, enabling safe, risk-free training and operational optimization in an Industry 5.0 environment.",
     image:
-      "synclathefinaleimage.jpg",
+      "/synclathefinaleimage.jpg",
     alt: "Digital twin of a CNC machine interface",
     features: [
       { name: "Real-time Physics Synchronization", icon: "RefreshCw" },
