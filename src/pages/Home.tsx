@@ -1,238 +1,390 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import Logo from "@/components/Logo";
+import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
+import {
+  ArrowLeft,
+  SkipForward,
+  RefreshCw,
+  Target,
+  Activity,
+  Settings,
+  Rotate3D,
+  MoveHorizontal,
+  Repeat,
+  CheckCircle,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend,
+} from "recharts";
+import { ref, onChildAdded, onValue, update } from "firebase/database";
+import { db } from "@/firebase/firebase";
 
-const Home = () => {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  
-  const plugin = useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
-  );
+/* ---------------- TYPES ---------------- */
+interface TelemetryPoint {
+  time: number;
+  val1: number;
+  val2: number;
+}
 
-  const projects = [
-    {
-      slug: "vita-verse",
-      title: "Vita Verse",
-      description: "Play Your Way To Heal. A gamified XR rehabilitation ecosystem designed to make physical therapy engaging, measurable, and effective for locomotory disabilities.",
-      image: "vitaVerse-background.png",
-      alt: "Vita Verse Rehabilitation",
-      imgClass: "object-cover",
-      bgClass: "bg-white" // Light image, white background
-    },
-    {
-      slug: "immersa",
-      title: "Immersa",
-      description: "Redefining brand presence with Advanced Digital Advertising. We use cutting-edge Holographic Projection to create attention-grabbing, 3D marketing experiences.",
-      image: "immersafinalimage.png",
-      alt: "Immersa Holographic Ads",
-      imgClass: "object-cover",
-      bgClass: "bg-white" // Light image, white background
-    },
-    {
-      slug: "chronos-vr",
-      title: "ChronosVR",
-      description: "Preserving the past, virtually. Experience high-fidelity Virtual Tours of Heritage and Tourism sites, allowing you to explore global culture and history from anywhere.",
-      image: "chronosvrfinaleimage.jpg",
-      alt: "ChronosVR Heritage Tours",
-      imgClass: "object-contain", // Fit the image
-      bgClass: "bg-black" // Dark background to blend with image
-    },
-    {
-      slug: "synclathe",
-      title: "SyncLathe",
-      description: "Industry 5.0 defined. A Digital Twin technology solution for CNC Lathe training that synchronizes virtual models with real-world physics for risk-free, immersive industrial learning.",
-      image: "synclathefinaleimage.jpg",
-      alt: "SyncLathe Digital Twin",
-      imgClass: "object-contain", // Fit the image
-      bgClass: "bg-black" // Dark background to blend with image
-    }
-  ];
+interface CalibrationData {
+  bendLeft?: number;
+  bendRight?: number;
+  torsoMaxLeft?: number;
+  torsoMaxRight?: number;
+}
 
+interface StageResult {
+  accuracy?: number;
+  stage: string;
+  completedReps?: number;
+}
+
+const ExerciseMonitor = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const sessionId = searchParams.get("session") || "";
+
+  /* ---------------- STATE ---------------- */
+  const [connected, setConnected] = useState(false);
+  const [currentStage, setCurrentStage] = useState<"torso_bend" | "torso_rotation">("torso_bend");
+  const [telemetry, setTelemetry] = useState<TelemetryPoint[]>([]);
+  const [calibration, setCalibration] = useState<CalibrationData | null>(null);
+  const [stageResult, setStageResult] = useState<StageResult | null>(null);
+  const [repCount, setRepCount] = useState(0);
+
+  /* BEND CONFIG */
+  const [duration, setDuration] = useState(60);
+  const [obstacleSpeed, setObstacleSpeed] = useState([50]);
+  const [spawnInterval, setSpawnInterval] = useState(2);
+  // Reusing existing calibration state for bend inputs to match your original logic
+  const [calibLeft, setCalibLeft] = useState(0);
+  const [calibRight, setCalibRight] = useState(0);
+
+  /* ROTATION CONFIG */
+  const [totalReps, setTotalReps] = useState(10);
+  const [tolerance, setTolerance] = useState(15);
+  // NEW: Independent variables for the new Rotation Card
+  const [configLeftAngle, setConfigLeftAngle] = useState(45);
+  const [configRightAngle, setConfigRightAngle] = useState(45);
+
+  /* ---------------- LISTENERS ---------------- */
   useEffect(() => {
-    if (!api) return;
+    if (!sessionId) return;
 
-    setCurrent(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
+    // 1. DETECT STAGE
+    onValue(ref(db, `sessions/${sessionId}/currentStage`), (snap) => {
+      if (snap.exists()) {
+        const stage = snap.val();
+        setCurrentStage(stage.includes("rotation") ? "torso_rotation" : "torso_bend");
+        setTelemetry([]);
+        setStageResult(null);
+        setRepCount(0);
+      }
     });
-  }, [api]);
 
+    // 2. LIVE EVENTS
+    onChildAdded(ref(db, `sessions/${sessionId}/livePatientData`), (snap) => {
+      const d = snap.val();
+      if (!d) return;
+      if (d.type === "rep_complete") setRepCount((prev) => prev + 1);
+
+      setTelemetry((prev) => {
+        let newVal1 = 0;
+        let newVal2 = 0;
+        if (d.type === "bend_event") {
+          newVal1 = d.event === "hit" ? 1 : 0;
+          newVal2 = d.event === "avoid" ? 1 : 0;
+        } else if (d.type === "rep_complete") {
+          newVal1 = d.side === "Left" ? 1 : 0;
+          newVal2 = d.side === "Right" ? 1 : 0;
+        }
+        return [...prev, { time: prev.length, val1: newVal1, val2: newVal2 }].slice(-50);
+      });
+    });
+
+    // 3. CALIBRATION
+    onValue(ref(db, `sessions/${sessionId}/calibrationData`), (snap) => {
+      if (snap.exists()) {
+        const c = snap.val();
+        setCalibration(c);
+        
+        // Auto-fill Bend inputs (Your original logic)
+        if (currentStage === "torso_bend" && c.bendLeft) {
+             setCalibLeft(c.bendLeft * 0.7);
+             setCalibRight(c.bendRight * 0.7);
+        }
+        // Auto-fill Rotation inputs (New logic)
+        if (c.torsoMaxLeft) setConfigLeftAngle(Math.round(c.torsoMaxLeft));
+        if (c.torsoMaxRight) setConfigRightAngle(Math.round(c.torsoMaxRight));
+      }
+    });
+
+    // 4. RESULT
+    onValue(ref(db, `sessions/${sessionId}/stageResult`), (snap) => {
+      if (snap.exists()) setStageResult(snap.val());
+    });
+
+    setConnected(true);
+  }, [sessionId, currentStage]);
+
+  /* ---------------- ACTIONS ---------------- */
+  const pushConfig = async () => {
+    setRepCount(0);
+    setTelemetry([]);
+
+    const config: any = { start: true };
+
+    if (currentStage === "torso_bend") {
+      config.sessionDuration = duration;
+      config.obstacleSpeed = obstacleSpeed[0] / 25;
+      config.spawnInterval = spawnInterval;
+      config.bendDistanceLeft = calibLeft;
+      config.bendDistanceRight = calibRight;
+    } else {
+      // ROTATION SPECIFIC
+      config.totalReps = totalReps;
+      config.tolerance = tolerance;
+      // Send the values from the NEW card
+      config.maxLeftAngle = configLeftAngle;
+      config.maxRightAngle = configRightAngle;
+    }
+
+    await update(ref(db, `sessions/${sessionId}/liveConfig`), config);
+    toast({ title: "Config Pushed & Session Started" });
+  };
+
+  const nextStage = async () => {
+    await update(ref(db, `sessions/${sessionId}`), { therapistDecision: "next" });
+    setStageResult(null);
+    toast({ title: "Next Stage Triggered" });
+  };
+
+  /* ---------------- UI ---------------- */
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <div className="min-h-screen relative">
+      <AnimatedBackground />
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* HEADER */}
+        <header className="border-b bg-card/30 backdrop-blur-xl">
+          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div className="flex items-center gap-4">
+              <Logo size="sm" />
+              <span className="bg-white/10 px-3 py-1 rounded-full text-xs font-mono">
+                ID: {sessionId}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className={`px-3 py-1 rounded text-xs font-bold uppercase ${currentStage === "torso_bend" ? "bg-blue-500/20 text-blue-400" : "bg-purple-500/20 text-purple-400"}`}>
+                {currentStage.replace("_", " ")}
+              </span>
+              <Button variant="ghost" onClick={() => navigate("/therapist/dashboard")}>
+                <ArrowLeft className="w-4 h-4 mr-2" /> Exit
+              </Button>
+            </div>
+          </div>
+        </header>
 
-      <section className="bg-gradient-to-b from-secondary to-background py-20 px-6">
-        <div className="container mx-auto">
-          <Carousel
-            setApi={setApi}
-            plugins={[plugin.current]}
-            opts={{
-              loop: true,
-            }}
-            className="w-full"
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
-          >
-            <CarouselContent>
-              {projects.map((project, index) => (
-                <CarouselItem key={index}>
-                  <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <motion.div
-                      initial={{ opacity: 0, x: -50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6">
-                        {project.title}
-                      </h1>
-                      <p className="text-lg text-foreground mb-8 leading-relaxed">
-                        {project.description}
-                      </p>
-                      <Link to={`/products/${project.slug}`}>
-                        <Button variant="outline" size="lg">
-                          Know More
-                        </Button>
-                      </Link>
-                    </motion.div>
+        {/* MAIN CONTENT GRID */}
+        <main className="flex-1 container mx-auto px-4 py-6">
+          {!connected ? (
+            <GlassCard className="text-center">Waiting for Unity connection…</GlassCard>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              {/* TOP LEFT: CALIBRATION & RESULTS */}
+              <div className="lg:col-span-3 space-y-4">
+                <GlassCard>
+                  <h3 className="font-semibold flex items-center gap-2 mb-3">
+                    <Target className="w-4 h-4" /> Calibration Data
+                  </h3>
+                  {!calibration ? <p className="text-xs text-gray-500">Waiting for patient...</p> : (
+                    <div className="space-y-4">
+                      {/* Bend Data */}
+                      {calibration.bendLeft !== undefined && (
+                        <div className={`p-2 rounded ${currentStage === "torso_bend" ? "bg-white/10" : "opacity-30"}`}>
+                          <div className="text-xs font-bold text-blue-300">Lateral Bend (m)</div>
+                          <div className="flex justify-between text-sm">
+                            <span>L: {calibration.bendLeft.toFixed(2)}</span>
+                            <span>R: {calibration.bendRight?.toFixed(2)}</span>
+                          </div>
+                        </div>
+                      )}
+                      {/* Rotation Data */}
+                      {calibration.torsoMaxLeft !== undefined && (
+                        <div className={`p-2 rounded ${currentStage === "torso_rotation" ? "bg-white/10" : "opacity-30"}`}>
+                          <div className="text-xs font-bold text-purple-300">Rotation (Deg)</div>
+                          <div className="flex justify-between text-sm">
+                            <span>L: {calibration.torsoMaxLeft.toFixed(0)}°</span>
+                            <span>R: {calibration.torsoMaxRight?.toFixed(0)}°</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </GlassCard>
 
-                    <motion.div
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                      className="relative h-96"
-                    >
-                      {/* UPDATED CONTAINER: Uses project.bgClass instead of hardcoded bg-white */}
-                      <div className={`${project.bgClass} rounded-3xl shadow-2xl overflow-hidden h-full flex items-center justify-center transition-colors duration-300`}>
-                        <img
-                          src={project.image}
-                          alt={project.alt}
-                          className={`w-full h-full ${project.imgClass}`}
-                        />
-                      </div>
-                    </motion.div>
+                {stageResult && (
+                  <GlassCard>
+                    <h3 className="font-semibold flex items-center gap-2 mb-2">
+                      <Activity className="w-4 h-4" /> Session Result
+                    </h3>
+                    <div className="text-center py-2">
+                        <CheckCircle className="w-8 h-8 mx-auto text-green-400 mb-2"/>
+                        <div className="text-xl font-bold">{stageResult.completedReps} Reps</div>
+                        <div className="text-xs text-gray-400">Completed</div>
+                    </div>
+                  </GlassCard>
+                )}
+              </div>
+
+              {/* CENTER: GRAPHS */}
+              <div className="lg:col-span-6">
+                <GlassCard className="h-[350px] flex flex-col">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-semibold flex items-center gap-2">
+                      <Activity className="w-4 h-4" /> Live Telemetry
+                    </h3>
+                    <span className="text-xs font-mono bg-white/10 px-2 py-1 rounded">
+                      Reps: {repCount} / {totalReps}
+                    </span>
                   </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+                  <div className="flex-1 min-h-0">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={telemetry}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+                        <YAxis allowDecimals={false} />
+                        <Tooltip contentStyle={{ backgroundColor: "#000", border: "1px solid #333" }} />
+                        <Legend />
+                        {currentStage === "torso_bend" ? (
+                           <>
+                           <Line name="Hits" dataKey="val1" stroke="#ef4444" strokeWidth={2} dot={false} />
+                           <Line name="Avoids" dataKey="val2" stroke="#22c55e" strokeWidth={2} dot={false} />
+                           </>
+                        ) : (
+                           <>
+                           <Line name="Left" dataKey="val1" stroke="#a855f7" strokeWidth={2} dot={false} type="step" />
+                           <Line name="Right" dataKey="val2" stroke="#3b82f6" strokeWidth={2} dot={false} type="step" />
+                           </>
+                        )}
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </GlassCard>
 
-          <div className="flex justify-center gap-2 mt-8">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => api?.scrollTo(index)}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  current === index ? "w-8 bg-primary" : "w-3 bg-primary/30"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-secondary py-20 px-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary opacity-20 transform skew-x-12 translate-x-1/4"></div>
-
-        <div className="container mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-                About us
-              </h2>
-              <p className="text-foreground mb-6 leading-relaxed">
-                Evika Innovations is pioneering digital transformation by integrating extended reality (XR) and artificial intelligence (AI) across healthcare, education, and enterprise sectors. With a mission to unlock human potential through immersive, data-driven solutions, we create impactful innovations such as interactive medical simulations, digital twins, and enterprise training modules. Guided by integrity, collaboration, and continuous learning, our team of experts delivers tailored XR solutions that accelerate recovery, enhance learning outcomes, and elevate performance—driving responsible, ethical, and sustainable transformation.
-              </p>
-              <Link to="/about">
-                <Button variant="outline" size="lg">
-                  More About us
-                </Button>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="relative">
-                <img
-                  src="aboutusimage.png"
-                  alt="About Working Details"
-                  className="w-full rounded-3xl"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-6 bg-background">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center bg-secondary p-8 sm:p-12 rounded-3xl border-2 border-primary/30">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-                Step into the Future.
-              </h2>
-              <p className="text-lg text-foreground mb-8">
-                Let's discuss how our XR and AI solutions can unlock new possibilities and create a competitive advantage for your organization.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="mailto:support@evikainnovations.com">
-                  <Button size="lg" className="w-full sm:w-auto">
-                    Book a Demo
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <Button onClick={pushConfig} className={currentStage === "torso_bend" ? "bg-blue-600 hover:bg-blue-500" : "bg-purple-600 hover:bg-purple-500"}>
+                    <RefreshCw className="w-4 h-4 mr-2" /> Start / Update
                   </Button>
-                </a>
-                <Link to="/products">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                    Explore Solutions
+                  <Button onClick={nextStage} variant="secondary">
+                    <SkipForward className="w-4 h-4 mr-2" /> Next Stage
                   </Button>
-                </Link>
+                </div>
               </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl"
-            >
-              <video
-                src="/logo_aniamtion.mp4" 
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+              {/* RIGHT: GENERAL SETTINGS */}
+              <div className="lg:col-span-3">
+                 <GlassCard>
+                    <h3 className="font-semibold mb-4">Settings</h3>
+                    {currentStage === "torso_bend" ? (
+                        <div className="space-y-4">
+                            <label className="text-xs text-gray-400">Duration (s)</label>
+                            <input type="number" value={duration} onChange={e=>setDuration(+e.target.value)} className="w-full p-2 rounded text-black"/>
+                            <label className="text-xs text-gray-400">Obs Speed</label>
+                            <Slider value={obstacleSpeed} onValueChange={setObstacleSpeed} className="py-2"/>
+                            
+                            <label className="text-xs text-blue-300 font-bold">Max Bend (M)</label>
+                            <div className="grid grid-cols-2 gap-2">
+                                <input type="number" value={calibLeft} step={0.01} onChange={e=>setCalibLeft(+e.target.value)} className="w-full p-2 rounded text-black" placeholder="L"/>
+                                <input type="number" value={calibRight} step={0.01} onChange={e=>setCalibRight(+e.target.value)} className="w-full p-2 rounded text-black" placeholder="R"/>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="space-y-4">
+                            <label className="text-xs text-gray-400">Total Reps</label>
+                            <input type="number" value={totalReps} onChange={e=>setTotalReps(+e.target.value)} className="w-full p-2 rounded text-black"/>
+                            <label className="text-xs text-gray-400">Tolerance (°)</label>
+                            <input type="number" value={tolerance} onChange={e=>setTolerance(+e.target.value)} className="w-full p-2 rounded text-black"/>
+                        </div>
+                    )}
+                 </GlassCard>
+              </div>
 
-      <Footer />
+              {/* ✅✅✅ NEW DEDICATED TORSO ROTATION CARD (BOTTOM) ✅✅✅ */}
+              {currentStage === "torso_rotation" && (
+                <div className="lg:col-span-12 mt-2">
+                    <GlassCard className="border-t-4 border-purple-500">
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                            
+                            <div className="space-y-1">
+                                <h3 className="text-xl font-bold text-purple-300 flex items-center gap-2">
+                                    <Rotate3D className="w-6 h-6"/> Rotation Manager
+                                </h3>
+                                <p className="text-sm text-gray-400">Configure spawn distance & angles based on calibration.</p>
+                            </div>
+
+                            <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {/* LEFT SIDE CONFIG */}
+                                <div className="space-y-2 bg-black/20 p-4 rounded-lg">
+                                    <div className="flex justify-between">
+                                        <span className="font-bold text-purple-300">LEFT Target</span>
+                                        <span className="text-xs text-gray-400">
+                                            Calibrated Max: {calibration?.torsoMaxLeft?.toFixed(0) || 0}°
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <Slider 
+                                            value={[configLeftAngle]} 
+                                            max={90} step={1} 
+                                            onValueChange={(v) => setConfigLeftAngle(v[0])} 
+                                            className="flex-1"
+                                        />
+                                        <span className="w-12 text-center font-mono text-xl">{configLeftAngle}°</span>
+                                    </div>
+                                    <p className="text-xs text-gray-500">Lower angle = Closer Target. Higher angle = Further Target.</p>
+                                </div>
+
+                                {/* RIGHT SIDE CONFIG */}
+                                <div className="space-y-2 bg-black/20 p-4 rounded-lg">
+                                    <div className="flex justify-between">
+                                        <span className="font-bold text-blue-300">RIGHT Target</span>
+                                        <span className="text-xs text-gray-400">
+                                            Calibrated Max: {calibration?.torsoMaxRight?.toFixed(0) || 0}°
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <Slider 
+                                            value={[configRightAngle]} 
+                                            max={90} step={1} 
+                                            onValueChange={(v) => setConfigRightAngle(v[0])} 
+                                            className="flex-1"
+                                        />
+                                        <span className="w-12 text-center font-mono text-xl">{configRightAngle}°</span>
+                                    </div>
+                                    <p className="text-xs text-gray-500">Adjust to challenge patient reach.</p>
+                                </div>
+                            </div>
+
+                            <Button onClick={pushConfig} size="lg" className="bg-purple-600 hover:bg-purple-500 h-full">
+                                Update <br/> Config
+                            </Button>
+                        </div>
+                    </GlassCard>
+                </div>
+              )}
+
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default ExerciseMonitor;
