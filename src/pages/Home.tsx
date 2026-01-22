@@ -1,390 +1,347 @@
-import { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import AnimatedBackground from "@/components/AnimatedBackground";
-import Logo from "@/components/Logo";
-import GlassCard from "@/components/GlassCard";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Slider } from "@/components/ui/slider";
-import {
-  ArrowLeft,
-  SkipForward,
-  RefreshCw,
-  Target,
-  Activity,
-  Settings,
-  Rotate3D,
-  MoveHorizontal,
-  Repeat,
-  CheckCircle,
-} from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Legend,
-} from "recharts";
-import { ref, onChildAdded, onValue, update } from "firebase/database";
-import { db } from "@/firebase/firebase";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 
-/* ---------------- TYPES ---------------- */
-interface TelemetryPoint {
-  time: number;
-  val1: number;
-  val2: number;
-}
+const Home = () => {
+  // --- Visionary Manifesto State Logic ---
+  const [step, setStep] = useState(0);
 
-interface CalibrationData {
-  bendLeft?: number;
-  bendRight?: number;
-  torsoMaxLeft?: number;
-  torsoMaxRight?: number;
-}
+  const phrases = [
+    "Mirrors the Reality",
+    "Worlds Reimagined",
+    "Redefine the Possible",
+  ];
 
-interface StageResult {
-  accuracy?: number;
-  stage: string;
-  completedReps?: number;
-}
-
-const ExerciseMonitor = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const { toast } = useToast();
-  const sessionId = searchParams.get("session") || "";
-
-  /* ---------------- STATE ---------------- */
-  const [connected, setConnected] = useState(false);
-  const [currentStage, setCurrentStage] = useState<"torso_bend" | "torso_rotation">("torso_bend");
-  const [telemetry, setTelemetry] = useState<TelemetryPoint[]>([]);
-  const [calibration, setCalibration] = useState<CalibrationData | null>(null);
-  const [stageResult, setStageResult] = useState<StageResult | null>(null);
-  const [repCount, setRepCount] = useState(0);
-
-  /* BEND CONFIG */
-  const [duration, setDuration] = useState(60);
-  const [obstacleSpeed, setObstacleSpeed] = useState([50]);
-  const [spawnInterval, setSpawnInterval] = useState(2);
-  // Reusing existing calibration state for bend inputs to match your original logic
-  const [calibLeft, setCalibLeft] = useState(0);
-  const [calibRight, setCalibRight] = useState(0);
-
-  /* ROTATION CONFIG */
-  const [totalReps, setTotalReps] = useState(10);
-  const [tolerance, setTolerance] = useState(15);
-  // NEW: Independent variables for the new Rotation Card
-  const [configLeftAngle, setConfigLeftAngle] = useState(45);
-  const [configRightAngle, setConfigRightAngle] = useState(45);
-
-  /* ---------------- LISTENERS ---------------- */
   useEffect(() => {
-    if (!sessionId) return;
+    let timer: NodeJS.Timeout;
 
-    // 1. DETECT STAGE
-    onValue(ref(db, `sessions/${sessionId}/currentStage`), (snap) => {
-      if (snap.exists()) {
-        const stage = snap.val();
-        setCurrentStage(stage.includes("rotation") ? "torso_rotation" : "torso_bend");
-        setTelemetry([]);
-        setStageResult(null);
-        setRepCount(0);
-      }
-    });
-
-    // 2. LIVE EVENTS
-    onChildAdded(ref(db, `sessions/${sessionId}/livePatientData`), (snap) => {
-      const d = snap.val();
-      if (!d) return;
-      if (d.type === "rep_complete") setRepCount((prev) => prev + 1);
-
-      setTelemetry((prev) => {
-        let newVal1 = 0;
-        let newVal2 = 0;
-        if (d.type === "bend_event") {
-          newVal1 = d.event === "hit" ? 1 : 0;
-          newVal2 = d.event === "avoid" ? 1 : 0;
-        } else if (d.type === "rep_complete") {
-          newVal1 = d.side === "Left" ? 1 : 0;
-          newVal2 = d.side === "Right" ? 1 : 0;
-        }
-        return [...prev, { time: prev.length, val1: newVal1, val2: newVal2 }].slice(-50);
-      });
-    });
-
-    // 3. CALIBRATION
-    onValue(ref(db, `sessions/${sessionId}/calibrationData`), (snap) => {
-      if (snap.exists()) {
-        const c = snap.val();
-        setCalibration(c);
-        
-        // Auto-fill Bend inputs (Your original logic)
-        if (currentStage === "torso_bend" && c.bendLeft) {
-             setCalibLeft(c.bendLeft * 0.7);
-             setCalibRight(c.bendRight * 0.7);
-        }
-        // Auto-fill Rotation inputs (New logic)
-        if (c.torsoMaxLeft) setConfigLeftAngle(Math.round(c.torsoMaxLeft));
-        if (c.torsoMaxRight) setConfigRightAngle(Math.round(c.torsoMaxRight));
-      }
-    });
-
-    // 4. RESULT
-    onValue(ref(db, `sessions/${sessionId}/stageResult`), (snap) => {
-      if (snap.exists()) setStageResult(snap.val());
-    });
-
-    setConnected(true);
-  }, [sessionId, currentStage]);
-
-  /* ---------------- ACTIONS ---------------- */
-  const pushConfig = async () => {
-    setRepCount(0);
-    setTelemetry([]);
-
-    const config: any = { start: true };
-
-    if (currentStage === "torso_bend") {
-      config.sessionDuration = duration;
-      config.obstacleSpeed = obstacleSpeed[0] / 25;
-      config.spawnInterval = spawnInterval;
-      config.bendDistanceLeft = calibLeft;
-      config.bendDistanceRight = calibRight;
-    } else {
-      // ROTATION SPECIFIC
-      config.totalReps = totalReps;
-      config.tolerance = tolerance;
-      // Send the values from the NEW card
-      config.maxLeftAngle = configLeftAngle;
-      config.maxRightAngle = configRightAngle;
+    // Phase 1: The Text Sequence (0, 1, 2)
+    if (step < phrases.length) {
+      const phraseDuration = 2500; // 2.5s per text
+      timer = setTimeout(() => {
+        setStep((prev) => prev + 1);
+      }, phraseDuration);
+    } 
+    // Phase 2: The Final Reveal (step === phrases.length)
+    else {
+      const holdDuration = 5000; // Hold final logo for 5 seconds
+      timer = setTimeout(() => {
+        setStep(0); // RESTART LOOP
+      }, holdDuration);
     }
 
-    await update(ref(db, `sessions/${sessionId}/liveConfig`), config);
-    toast({ title: "Config Pushed & Session Started" });
+    return () => clearTimeout(timer);
+  }, [step]);
+
+  // Scroll to About section helper
+  const scrollToContent = () => {
+    const aboutSection = document.getElementById("about-section");
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
-  const nextStage = async () => {
-    await update(ref(db, `sessions/${sessionId}`), { therapistDecision: "next" });
-    setStageResult(null);
-    toast({ title: "Next Stage Triggered" });
-  };
-
-  /* ---------------- UI ---------------- */
   return (
-    <div className="min-h-screen relative">
-      <AnimatedBackground />
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* HEADER */}
-        <header className="border-b bg-card/30 backdrop-blur-xl">
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <Logo size="sm" />
-              <span className="bg-white/10 px-3 py-1 rounded-full text-xs font-mono">
-                ID: {sessionId}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className={`px-3 py-1 rounded text-xs font-bold uppercase ${currentStage === "torso_bend" ? "bg-blue-500/20 text-blue-400" : "bg-purple-500/20 text-purple-400"}`}>
-                {currentStage.replace("_", " ")}
-              </span>
-              <Button variant="ghost" onClick={() => navigate("/therapist/dashboard")}>
-                <ArrowLeft className="w-4 h-4 mr-2" /> Exit
-              </Button>
-            </div>
-          </div>
-        </header>
+    <div className="min-h-screen bg-background">
+      <Navbar />
 
-        {/* MAIN CONTENT GRID */}
-        <main className="flex-1 container mx-auto px-4 py-6">
-          {!connected ? (
-            <GlassCard className="text-center">Waiting for Unity connection…</GlassCard>
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              
-              {/* TOP LEFT: CALIBRATION & RESULTS */}
-              <div className="lg:col-span-3 space-y-4">
-                <GlassCard>
-                  <h3 className="font-semibold flex items-center gap-2 mb-3">
-                    <Target className="w-4 h-4" /> Calibration Data
-                  </h3>
-                  {!calibration ? <p className="text-xs text-gray-500">Waiting for patient...</p> : (
-                    <div className="space-y-4">
-                      {/* Bend Data */}
-                      {calibration.bendLeft !== undefined && (
-                        <div className={`p-2 rounded ${currentStage === "torso_bend" ? "bg-white/10" : "opacity-30"}`}>
-                          <div className="text-xs font-bold text-blue-300">Lateral Bend (m)</div>
-                          <div className="flex justify-between text-sm">
-                            <span>L: {calibration.bendLeft.toFixed(2)}</span>
-                            <span>R: {calibration.bendRight?.toFixed(2)}</span>
-                          </div>
-                        </div>
-                      )}
-                      {/* Rotation Data */}
-                      {calibration.torsoMaxLeft !== undefined && (
-                        <div className={`p-2 rounded ${currentStage === "torso_rotation" ? "bg-white/10" : "opacity-30"}`}>
-                          <div className="text-xs font-bold text-purple-300">Rotation (Deg)</div>
-                          <div className="flex justify-between text-sm">
-                            <span>L: {calibration.torsoMaxLeft.toFixed(0)}°</span>
-                            <span>R: {calibration.torsoMaxRight?.toFixed(0)}°</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </GlassCard>
+      {/* --- NEW HERO SECTION (Replaces Carousel) --- */}
+      <section className="bg-gradient-to-b from-purple-50 to-background py-10 md:py-20 px-6">
+        <div className="container mx-auto">
+          
+          {/* THE ANIMATION CARD */}
+          {/* REVERTED: Solid bg-secondary (No Gradient) */}
+          <div className="relative w-full h-[500px] md:h-[600px] bg-secondary rounded-[2.5rem] shadow-2xl border border-purple-100 overflow-hidden flex flex-col items-center justify-center">
+            
+            {/* 1. Mesh Network Background */}
+            <div className="absolute inset-0 z-0">
+                <ParticleBackground />
+            </div>
 
-                {stageResult && (
-                  <GlassCard>
-                    <h3 className="font-semibold flex items-center gap-2 mb-2">
-                      <Activity className="w-4 h-4" /> Session Result
-                    </h3>
-                    <div className="text-center py-2">
-                        <CheckCircle className="w-8 h-8 mx-auto text-green-400 mb-2"/>
-                        <div className="text-xl font-bold">{stageResult.completedReps} Reps</div>
-                        <div className="text-xs text-gray-400">Completed</div>
-                    </div>
-                  </GlassCard>
+            {/* 2. The Text Sequence */}
+            <div className="z-10 text-center px-4 w-full max-w-5xl relative">
+              <AnimatePresence mode="wait">
+                
+                {/* PHASE 1: The Phrases */}
+                {step < phrases.length && (
+                  <motion.h2
+                    key={phrases[step]}
+                    initial={{ opacity: 0, filter: "blur(15px)", y: 30 }}
+                    animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                    exit={{ opacity: 0, filter: "blur(20px)", y: -30 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className="text-4xl md:text-7xl font-light tracking-[0.15em] text-slate-700 drop-shadow-sm"
+                  >
+                    {phrases[step]}
+                  </motion.h2>
                 )}
-              </div>
 
-              {/* CENTER: GRAPHS */}
-              <div className="lg:col-span-6">
-                <GlassCard className="h-[350px] flex flex-col">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold flex items-center gap-2">
-                      <Activity className="w-4 h-4" /> Live Telemetry
-                    </h3>
-                    <span className="text-xs font-mono bg-white/10 px-2 py-1 rounded">
-                      Reps: {repCount} / {totalReps}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-h-0">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={telemetry}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                        <YAxis allowDecimals={false} />
-                        <Tooltip contentStyle={{ backgroundColor: "#000", border: "1px solid #333" }} />
-                        <Legend />
-                        {currentStage === "torso_bend" ? (
-                           <>
-                           <Line name="Hits" dataKey="val1" stroke="#ef4444" strokeWidth={2} dot={false} />
-                           <Line name="Avoids" dataKey="val2" stroke="#22c55e" strokeWidth={2} dot={false} />
-                           </>
-                        ) : (
-                           <>
-                           <Line name="Left" dataKey="val1" stroke="#a855f7" strokeWidth={2} dot={false} type="step" />
-                           <Line name="Right" dataKey="val2" stroke="#3b82f6" strokeWidth={2} dot={false} type="step" />
-                           </>
-                        )}
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </GlassCard>
+                {/* PHASE 2: The Final Reveal */}
+                {step === phrases.length && (
+                  <motion.div
+                    key="final-reveal"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0, filter: "blur(10px)" }} 
+                    transition={{ duration: 1.5 }}
+                    className="flex flex-col items-center"
+                  >
+                    {/* Main Company Name */}
+                    <motion.h1
+                      initial={{ scale: 0.95, filter: "blur(8px)" }}
+                      animate={{ scale: 1, filter: "blur(0px)" }}
+                      transition={{ duration: 1.2, delay: 0.2 }}
+                      className="text-4xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-800 mb-6 text-center"
+                    >
+                      EVIKA INNOVATIONS
+                    </motion.h1>
 
-                <div className="grid grid-cols-2 gap-4 mt-4">
-                  <Button onClick={pushConfig} className={currentStage === "torso_bend" ? "bg-blue-600 hover:bg-blue-500" : "bg-purple-600 hover:bg-purple-500"}>
-                    <RefreshCw className="w-4 h-4 mr-2" /> Start / Update
-                  </Button>
-                  <Button onClick={nextStage} variant="secondary">
-                    <SkipForward className="w-4 h-4 mr-2" /> Next Stage
-                  </Button>
-                </div>
-              </div>
+                    {/* Tagline */}
+                    <motion.p
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, delay: 1.0 }}
+                      className="text-sm md:text-lg font-semibold tracking-[0.4em] text-purple-600 uppercase mb-12"
+                    >
+                      Reality Revamped
+                    </motion.p>
 
-              {/* RIGHT: GENERAL SETTINGS */}
-              <div className="lg:col-span-3">
-                 <GlassCard>
-                    <h3 className="font-semibold mb-4">Settings</h3>
-                    {currentStage === "torso_bend" ? (
-                        <div className="space-y-4">
-                            <label className="text-xs text-gray-400">Duration (s)</label>
-                            <input type="number" value={duration} onChange={e=>setDuration(+e.target.value)} className="w-full p-2 rounded text-black"/>
-                            <label className="text-xs text-gray-400">Obs Speed</label>
-                            <Slider value={obstacleSpeed} onValueChange={setObstacleSpeed} className="py-2"/>
-                            
-                            <label className="text-xs text-blue-300 font-bold">Max Bend (M)</label>
-                            <div className="grid grid-cols-2 gap-2">
-                                <input type="number" value={calibLeft} step={0.01} onChange={e=>setCalibLeft(+e.target.value)} className="w-full p-2 rounded text-black" placeholder="L"/>
-                                <input type="number" value={calibRight} step={0.01} onChange={e=>setCalibRight(+e.target.value)} className="w-full p-2 rounded text-black" placeholder="R"/>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="space-y-4">
-                            <label className="text-xs text-gray-400">Total Reps</label>
-                            <input type="number" value={totalReps} onChange={e=>setTotalReps(+e.target.value)} className="w-full p-2 rounded text-black"/>
-                            <label className="text-xs text-gray-400">Tolerance (°)</label>
-                            <input type="number" value={tolerance} onChange={e=>setTolerance(+e.target.value)} className="w-full p-2 rounded text-black"/>
-                        </div>
-                    )}
-                 </GlassCard>
-              </div>
-
-              {/* ✅✅✅ NEW DEDICATED TORSO ROTATION CARD (BOTTOM) ✅✅✅ */}
-              {currentStage === "torso_rotation" && (
-                <div className="lg:col-span-12 mt-2">
-                    <GlassCard className="border-t-4 border-purple-500">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                            
-                            <div className="space-y-1">
-                                <h3 className="text-xl font-bold text-purple-300 flex items-center gap-2">
-                                    <Rotate3D className="w-6 h-6"/> Rotation Manager
-                                </h3>
-                                <p className="text-sm text-gray-400">Configure spawn distance & angles based on calibration.</p>
-                            </div>
-
-                            <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* LEFT SIDE CONFIG */}
-                                <div className="space-y-2 bg-black/20 p-4 rounded-lg">
-                                    <div className="flex justify-between">
-                                        <span className="font-bold text-purple-300">LEFT Target</span>
-                                        <span className="text-xs text-gray-400">
-                                            Calibrated Max: {calibration?.torsoMaxLeft?.toFixed(0) || 0}°
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-4">
-                                        <Slider 
-                                            value={[configLeftAngle]} 
-                                            max={90} step={1} 
-                                            onValueChange={(v) => setConfigLeftAngle(v[0])} 
-                                            className="flex-1"
-                                        />
-                                        <span className="w-12 text-center font-mono text-xl">{configLeftAngle}°</span>
-                                    </div>
-                                    <p className="text-xs text-gray-500">Lower angle = Closer Target. Higher angle = Further Target.</p>
-                                </div>
-
-                                {/* RIGHT SIDE CONFIG */}
-                                <div className="space-y-2 bg-black/20 p-4 rounded-lg">
-                                    <div className="flex justify-between">
-                                        <span className="font-bold text-blue-300">RIGHT Target</span>
-                                        <span className="text-xs text-gray-400">
-                                            Calibrated Max: {calibration?.torsoMaxRight?.toFixed(0) || 0}°
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-4">
-                                        <Slider 
-                                            value={[configRightAngle]} 
-                                            max={90} step={1} 
-                                            onValueChange={(v) => setConfigRightAngle(v[0])} 
-                                            className="flex-1"
-                                        />
-                                        <span className="w-12 text-center font-mono text-xl">{configRightAngle}°</span>
-                                    </div>
-                                    <p className="text-xs text-gray-500">Adjust to challenge patient reach.</p>
-                                </div>
-                            </div>
-
-                            <Button onClick={pushConfig} size="lg" className="bg-purple-600 hover:bg-purple-500 h-full">
-                                Update <br/> Config
-                            </Button>
-                        </div>
-                    </GlassCard>
-                </div>
-              )}
-
+                    {/* Explore Button */}
+                    <motion.button
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 1.8 }}
+                      whileHover={{
+                        scale: 1.05,
+                        backgroundColor: "rgba(147, 51, 234, 0.1)" 
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={scrollToContent}
+                      className="px-8 py-3 border border-purple-300 rounded-full text-xs md:text-sm font-bold tracking-widest text-purple-900 hover:border-purple-500 transition-all flex items-center gap-2 group cursor-pointer bg-white/50 backdrop-blur-sm"
+                    >
+                      EXPLORE
+                      <ChevronRight className="w-4 h-4 text-purple-600 group-hover:translate-x-1 transition-transform" />
+                    </motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          )}
-        </main>
-      </div>
+
+            {/* Subtle Gradient Overlay */}
+            <div className="absolute inset-0 pointer-events-none z-20 bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.1)_0%,transparent_60%)]" />
+          </div>
+        </div>
+      </section>
+
+      {/* --- About Section (Unchanged) --- */}
+      <section id="about-section" className="bg-secondary py-20 px-6 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary opacity-20 transform skew-x-12 translate-x-1/4"></div>
+
+        <div className="container mx-auto relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+                About us
+              </h2>
+              <p className="text-foreground mb-6 leading-relaxed">
+                Evika Innovations is pioneering digital transformation by integrating extended reality (XR) and artificial intelligence (AI) across healthcare, education, and enterprise sectors. With a mission to unlock human potential through immersive, data-driven solutions, we create impactful innovations such as interactive medical simulations, digital twins, and enterprise training modules. Guided by integrity, collaboration, and continuous learning, our team of experts delivers tailored XR solutions that accelerate recovery, enhance learning outcomes, and elevate performance—driving responsible, ethical, and sustainable transformation.
+              </p>
+              <Link to="/about">
+                <Button variant="outline" size="lg">
+                  More About us
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+                  alt="Team collaboration"
+                  className="w-full rounded-3xl"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- Contact/Video Section (Unchanged) --- */}
+      <section className="py-20 px-6 bg-background">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center bg-secondary p-8 sm:p-12 rounded-3xl border-2 border-primary/30">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+                Step into the Future.
+              </h2>
+              <p className="text-lg text-foreground mb-8">
+                Let's discuss how our XR and AI solutions can unlock new possibilities and create a competitive advantage for your organization.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="mailto:support@evikainnovations.com">
+                  <Button size="lg" className="w-full sm:w-auto">
+                    Book a Demo
+                  </Button>
+                </a>
+                <Link to="/products">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    Explore Solutions
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative h-64 md:h-full w-full flex items-center justify-center overflow-hidden rounded-2xl"
+            >
+              <video
+                src="/logo_aniamtion.mp4" 
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover rounded-2xl"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 };
 
-export default ExerciseMonitor;
+// --- Particle Background (Big Purple Bubbles) ---
+const ParticleBackground = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+
+    const handleResize = () => {
+      if (canvas.parentElement) {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    const particlesArray: Particle[] = [];
+    const numberOfParticles = 80;
+
+    class Particle {
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+
+      constructor() {
+        this.x = Math.random() * (canvas?.width || 0);
+        this.y = Math.random() * (canvas?.height || 0);
+        
+        // Large Bubble Size (Range: 1.5 to 4.5)
+        this.size = Math.random() * 3 + 1.5; 
+        
+        this.speedX = Math.random() * 0.4 - 0.2;
+        this.speedY = Math.random() * 0.4 - 0.2;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (canvas) {
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+      }
+      draw() {
+        if (!ctx) return;
+        // Soft Purple Particle Color
+        ctx.fillStyle = "rgba(147, 51, 234, 0.4)"; 
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < numberOfParticles; i++) {
+      particlesArray.push(new Particle());
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+
+        for (let j = i; j < particlesArray.length; j++) {
+          const dx = particlesArray[i].x - particlesArray[j].x;
+          const dy = particlesArray[i].y - particlesArray[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) { 
+            ctx.beginPath();
+            // Purple connecting lines
+            ctx.strokeStyle = `rgba(147, 51, 234, ${0.15 - distance / 1000})`; 
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="block w-full h-full opacity-60" 
+    />
+  );
+};
+
+export default Home;
