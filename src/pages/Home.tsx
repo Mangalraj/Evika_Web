@@ -19,25 +19,21 @@ const Home = () => {
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
-    // Phase 1: The Text Sequence (0, 1, 2)
     if (step < phrases.length) {
-      const phraseDuration = 2500; // 2.5s per text
+      const phraseDuration = 2500;
       timer = setTimeout(() => {
         setStep((prev) => prev + 1);
       }, phraseDuration);
-    } 
-    // Phase 2: The Final Reveal (step === phrases.length)
-    else {
-      const holdDuration = 5000; // Hold final logo for 5 seconds
+    } else {
+      const holdDuration = 5000;
       timer = setTimeout(() => {
-        setStep(0); // RESTART LOOP
+        setStep(0);
       }, holdDuration);
     }
 
     return () => clearTimeout(timer);
   }, [step]);
 
-  // Scroll to About section helper
   const scrollToContent = () => {
     const aboutSection = document.getElementById("about-section");
     if (aboutSection) {
@@ -50,16 +46,12 @@ const Home = () => {
       <Navbar />
 
       {/* --- HERO SECTION --- */}
-      {/* FIXED: Applied the 70% Purple / 30% White blend here to the PAGE BACKGROUND.
-          from-secondary = Starts Purple
-          via-secondary via-70% = Stays Purple for 70% of the height
-          to-background = Fades to White at the bottom
-      */}
+      {/* BACKGROUND: 70% Purple -> 30% White Gradient (Applied to Section) */}
       <section className="bg-gradient-to-b from-secondary via-secondary via-70% to-background py-10 md:py-20 px-6">
         <div className="container mx-auto">
           
-          {/* THE ANIMATION CARD */}
-          {/* Kept as solid 'bg-secondary' as you liked the inside grid */}
+          {/* ANIMATION CARD */}
+          {/* Inside: Solid bg-secondary, Dark Text, Dark Particles (Restored) */}
           <div className="relative w-full h-[500px] md:h-[600px] bg-secondary rounded-[2.5rem] shadow-2xl border border-purple-100/20 overflow-hidden flex flex-col items-center justify-center">
             
             {/* 1. Mesh Network Background */}
@@ -79,8 +71,8 @@ const Home = () => {
                     animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                     exit={{ opacity: 0, filter: "blur(20px)", y: -30 }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    // Adjusted text color slightly to ensure contrast if needed
-                    className="text-4xl md:text-7xl font-light tracking-[0.15em] text-slate-100 drop-shadow-sm"
+                    // RESTORED: Dark Text (slate-700) for contrast on light background
+                    className="text-4xl md:text-7xl font-light tracking-[0.15em] text-slate-700 drop-shadow-sm"
                   >
                     {phrases[step]}
                   </motion.h2>
@@ -96,41 +88,41 @@ const Home = () => {
                     transition={{ duration: 1.5 }}
                     className="flex flex-col items-center"
                   >
-                    {/* Main Company Name */}
+                    {/* RESTORED: Gradient Purple Text */}
                     <motion.h1
                       initial={{ scale: 0.95, filter: "blur(8px)" }}
                       animate={{ scale: 1, filter: "blur(0px)" }}
                       transition={{ duration: 1.2, delay: 0.2 }}
-                      className="text-4xl md:text-7xl font-black tracking-tighter text-white mb-6 text-center"
+                      className="text-4xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-800 mb-6 text-center"
                     >
                       EVIKA INNOVATIONS
                     </motion.h1>
 
-                    {/* Tagline */}
+                    {/* RESTORED: Purple Tagline */}
                     <motion.p
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 1, delay: 1.0 }}
-                      className="text-sm md:text-lg font-semibold tracking-[0.4em] text-purple-200 uppercase mb-12"
+                      className="text-sm md:text-lg font-semibold tracking-[0.4em] text-purple-600 uppercase mb-12"
                     >
                       Reality Revamped
                     </motion.p>
 
-                    {/* Explore Button */}
+                    {/* RESTORED: Purple Button Style */}
                     <motion.button
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 1.8 }}
                       whileHover={{
                         scale: 1.05,
-                        backgroundColor: "rgba(255, 255, 255, 0.1)" 
+                        backgroundColor: "rgba(147, 51, 234, 0.1)" 
                       }}
                       whileTap={{ scale: 0.95 }}
                       onClick={scrollToContent}
-                      className="px-8 py-3 border border-purple-200/30 rounded-full text-xs md:text-sm font-bold tracking-widest text-white hover:border-white transition-all flex items-center gap-2 group cursor-pointer bg-white/10 backdrop-blur-sm"
+                      className="px-8 py-3 border border-purple-300 rounded-full text-xs md:text-sm font-bold tracking-widest text-purple-900 hover:border-purple-500 transition-all flex items-center gap-2 group cursor-pointer bg-white/50 backdrop-blur-sm"
                     >
                       EXPLORE
-                      <ChevronRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight className="w-4 h-4 text-purple-600 group-hover:translate-x-1 transition-transform" />
                     </motion.button>
                   </motion.div>
                 )}
@@ -138,7 +130,7 @@ const Home = () => {
             </div>
 
             {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 pointer-events-none z-20 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1)_0%,transparent_60%)]" />
+            <div className="absolute inset-0 pointer-events-none z-20 bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.1)_0%,transparent_60%)]" />
           </div>
         </div>
       </section>
@@ -242,7 +234,7 @@ const Home = () => {
   );
 };
 
-// --- Particle Background (Kept exactly as you liked it) ---
+// --- Particle Background (RESTORED: Darker Particles for Light Card) ---
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -278,7 +270,6 @@ const ParticleBackground = () => {
         this.x = Math.random() * (canvas?.width || 0);
         this.y = Math.random() * (canvas?.height || 0);
         
-        // Large Bubble Size
         this.size = Math.random() * 3 + 1.5; 
         
         this.speedX = Math.random() * 0.4 - 0.2;
@@ -297,9 +288,8 @@ const ParticleBackground = () => {
       }
       draw() {
         if (!ctx) return;
-        // Adjusted Particle Color to White/Light since background is now purple
-        // If background is purple, particles need to be light to be seen
-        ctx.fillStyle = "rgba(255, 255, 255, 0.3)"; 
+        // RESTORED: Darker Purple for contrast against light card
+        ctx.fillStyle = "rgba(147, 51, 234, 0.4)"; 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -324,8 +314,8 @@ const ParticleBackground = () => {
 
           if (distance < 120) { 
             ctx.beginPath();
-            // Light connecting lines for purple background
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 - distance / 1000})`; 
+            // RESTORED: Darker connecting lines
+            ctx.strokeStyle = `rgba(147, 51, 234, ${0.15 - distance / 1000})`; 
             ctx.lineWidth = 0.5;
             ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
             ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
