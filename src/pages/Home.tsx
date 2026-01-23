@@ -11,8 +11,8 @@ const Home = () => {
   const [step, setStep] = useState(0);
 
   const phrases = [
-    "Mirrors the Reality",
-    "Worlds Reimagined",
+    "Immerse. Innovate. Inspire",
+    "Heal, Learn, and Explore Beyond Boundaries",
     "Redefine the Possible",
   ];
 
@@ -20,16 +20,16 @@ const Home = () => {
     let timer: NodeJS.Timeout;
 
     if (step < phrases.length) {
-      const phraseDuration = 2500;
+      const phraseDuration = 2000;
       timer = setTimeout(() => {
         setStep((prev) => prev + 1);
       }, phraseDuration);
-    } else {
-      const holdDuration = 5000;
-      timer = setTimeout(() => {
-        setStep(0);
-      }, holdDuration);
-    }
+    // } else {
+    //   const holdDuration = 5000;
+    //   timer = setTimeout(() => {
+    //     setStep(0);
+    //   }, holdDuration);
+    // }
 
     return () => clearTimeout(timer);
   }, [step]);
