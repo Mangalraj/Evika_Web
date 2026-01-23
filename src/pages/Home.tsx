@@ -19,17 +19,14 @@ const Home = () => {
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
+    // We only set a timer if we haven't reached the final state yet.
     if (step < phrases.length) {
       const phraseDuration = 2000;
       timer = setTimeout(() => {
         setStep((prev) => prev + 1);
       }, phraseDuration);
-    // } else {
-    //   const holdDuration = 5000;
-    //   timer = setTimeout(() => {
-    //     setStep(0);
-    //   }, holdDuration);
-    // }
+    } 
+    // The else block (reset logic) has been removed so it stops here.
 
     return () => clearTimeout(timer);
   }, [step]);
