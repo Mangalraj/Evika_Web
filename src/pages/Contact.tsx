@@ -1,4 +1,4 @@
-import { useState } from 'react'; // Import useState
+import { useState } from 'react'; 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
-  // 1. State to manage form inputs and the submission result
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,17 +15,14 @@ const Contact = () => {
   });
   const [result, setResult] = useState<string | null>(null);
 
-  // 2. Function to update state when user types
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 3. Function to handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setResult("Sending....");
 
-    // Send data to our own serverless function
     const response = await fetch("/api/contact", {
       method: "POST",
       headers: {
@@ -39,7 +35,6 @@ const Contact = () => {
 
     if (response.ok) {
       setResult("Message sent successfully! ");
-      // Clear the form fields after successful submission
       setFormData({ name: "", email: "", phone: "", message: "" });
     } else {
       console.error("Error:", data.message);
@@ -63,7 +58,7 @@ const Contact = () => {
           </motion.h1>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Left Column - Contact Info (No changes here) */}
+            {/* Left Column - Contact Info */}
             <div className="space-y-6">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -73,22 +68,22 @@ const Contact = () => {
               >
                 <h2 className="text-2xl font-bold text-primary mb-4">Registered Address</h2>
                 <p className="text-foreground mb-6">3/46 B Gandhinagar, Kappalur, Madurai - 625008</p>
-                {/* <h2 className="text-2xl font-bold text-primary mb-4">Corporate Address</h2>
-                <p className="text-foreground">Venture Development centre, GITAM Bengaluru, Nagadenahalli, Karnataka - 561203</p> */}
+                
                 <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Phone Number</h2>
                 <p className="text-foreground">+91 6363252306</p>
                 <h2 className="text-2xl font-bold text-primary mb-4 mt-6">Email</h2>
                 <p className="text-foreground">support@evikainnovations.com</p>
               </motion.div>
+              
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="bg-secondary rounded-3xl border-2 border-primary/30 overflow-hidden aspect-square"
               >
+                {/* UPDATED: Uses a valid Google Maps Embed URL for Kappalur, Madurai */}
                 <iframe
-                  // UPDATED: Changed 'http' to 'https' here
-                  src="https://googleusercontent.com/maps.google.com/0"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.670564639686!2d78.02677937450772!3d9.877661575129657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00cf319714277b%3A0x64e3c306540d5882!2sKappalur%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1706175000000!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border:0 }}
@@ -107,14 +102,13 @@ const Contact = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-secondary p-8 rounded-3xl border-2 border-primary/30"
             >
-              {/* 4. Wrap form in a <form> tag with the onSubmit handler */}
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="text-primary font-semibold mb-2 block">Name</label>
                   <Input
-                    name="name" // Link to state
-                    value={formData.name} // Control the value
-                    onChange={handleChange} // Handle changes
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Enter here"
                     className="h-12 bg-background border-primary/30"
                     required
@@ -159,7 +153,6 @@ const Contact = () => {
                 </Button>
               </form>
               
-              {/* 5. Display the result message to the user */}
               {result && <p className="text-center mt-4 text-primary">{result}</p>}
             </motion.div>
           </div>
