@@ -80,9 +80,9 @@ const ProductDetailPage = () => {
     setFormError(null);
 
     try {
-      const response = await fetch('/api/request-brochure', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/request-brochure", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
           productName: product.title,
@@ -97,7 +97,6 @@ const ProductDetailPage = () => {
 
       setIsSubmissionSuccessful(true);
       setFormData({ name: "", email: "", company: "", reason: "" });
-
     } catch (error: any) {
       setFormError(error.message || "Failed to submit request. Please try again.");
     } finally {
@@ -180,7 +179,8 @@ const ProductDetailPage = () => {
                           <div className="py-6 text-center">
                             <PartyPopper className="h-16 w-16 text-green-500 mx-auto mb-4" />
                             <p className="text-muted-foreground">
-                              Your request has been received. Our team will send the brochure within <strong>24 business hours</strong>.
+                              Your request has been received. Our team will send the brochure within{" "}
+                              <strong>24 business hours</strong>.
                             </p>
                           </div>
                           <DialogFooter>
@@ -268,7 +268,7 @@ const ProductDetailPage = () => {
           </div>
         </section>
 
-        {/* 🔊 UPDATED Demo Video Section (button added, nothing removed) */}
+        {/* Demo Video Section – Simbott style */}
         <section className="py-20 px-6 bg-background">
           <div className="container mx-auto text-center">
             <h2 className="text-4xl font-bold text-primary mb-12">
@@ -276,29 +276,15 @@ const ProductDetailPage = () => {
             </h2>
 
             {product.demoVideoUrl ? (
-              <div className="relative max-w-4xl mx-auto aspect-video rounded-3xl overflow-hidden shadow-lg">
+              <div className="max-w-4xl mx-auto aspect-video rounded-3xl overflow-hidden shadow-lg">
                 <iframe
                   src={product.demoVideoUrl}
                   title={`${product.title} Demo Video`}
                   className="w-full h-full"
                   frameBorder="0"
-                  allow="autoplay; encrypted-media"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
-
-                {/* 🔊 Enable Sound Button */}
-                <button
-                  onClick={() => {
-                    const iframe = document.querySelector("iframe");
-                    iframe?.contentWindow?.postMessage(
-                      '{"event":"command","func":"unMute","args":""}',
-                      "*"
-                    );
-                  }}
-                  className="absolute bottom-4 right-4 bg-black/70 text-white px-4 py-2 rounded-lg hover:bg-black/90 transition"
-                >
-                  🔊 Enable Sound
-                </button>
               </div>
             ) : (
               <motion.div
