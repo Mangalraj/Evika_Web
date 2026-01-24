@@ -8,7 +8,7 @@ export interface Product {
   image: string;
   alt: string;
   features: { name: string; icon: string }[];
-  demoVideoUrl?: string; //
+  demoVideoUrl?: string; // optional
 }
 
 export const products: Product[] = [
@@ -21,8 +21,11 @@ export const products: Product[] = [
       "VitaVerse transforms physical therapy into an engaging, gamified experience. Our XR rehabilitation ecosystem is specifically designed for locomotory disabilities, offering personalized exercise plans, real-time feedback, and high-retention gameplay that makes healing fun and measurable.",
     image: "/vitaVerse-background.png",
     alt: "Patient using Vita Verse XR rehabilitation system",
+
+    // ✅ UPDATED: enablejsapi=1 added (required for unMute button)
     demoVideoUrl:
-      "https://www.youtube.com/embed/xnOXV6QoHnk?autoplay=1&mute=1&loop=1&playlist=xnOXV6QoHnk&controls=0&rel=0",
+      "https://www.youtube.com/embed/xnOXV6QoHnk?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=xnOXV6QoHnk&controls=0&rel=0",
+
     features: [
       { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
       { name: "Gamified Exercises for High Retention", icon: "Gamepad" },
