@@ -41,7 +41,6 @@ const Home = () => {
       <Navbar />
 
       {/* --- HERO SECTION --- */}
-      {/* UPDATE: Removed the "card" container. Animation is now the section background. */}
       <section className="relative w-full h-screen min-h-[600px] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-secondary via-secondary via-70% to-background">
         
         {/* 1. Full Screen Particle Background */}
@@ -51,7 +50,7 @@ const Home = () => {
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(255,255,255,0.8)_100%)]" />
         </div>
 
-        {/* 2. The Text Sequence (Centered directly in section) */}
+        {/* 2. The Text Sequence */}
         <div className="container relative z-10 px-4 flex flex-col items-center justify-center">
           <AnimatePresence mode="wait">
             
@@ -163,51 +162,62 @@ const Home = () => {
       </section>
 
       {/* --- Contact/Video Section (UPDATED) --- */}
-      {/* UPDATE: Removed grid. Video is now the full background. Content overlays it. */}
-      <section className="relative py-32 px-6 overflow-hidden flex items-center justify-center">
-        
-        {/* 1. Video Background */}
-        <div className="absolute inset-0 z-0">
-          <video
-            src="/logo_aniamtion.mp4" 
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
-          {/* Overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-white/90 dark:bg-black/60 backdrop-blur-[2px]" />
-        </div>
-
-        {/* 2. Content Overlay */}
-        <div className="container relative z-10 text-center max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl md:text-7xl font-bold text-primary mb-6">
-              Step into the Future.
-            </h2>
-            <p className="text-xl md:text-2xl text-foreground/80 mb-10 leading-relaxed">
-              Let's discuss how our XR and AI solutions can unlock new possibilities and create a competitive advantage for your organization.
-            </p>
+      <section className="relative py-32 px-6 overflow-hidden bg-gradient-to-b from-secondary via-secondary via-70% to-background">
+        <div className="container mx-auto relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <a href="mailto:support@evikainnovations.com">
-                <Button size="xl" className="w-full sm:w-auto px-10 text-lg shadow-xl">
-                  Book a Demo
-                </Button>
-              </a>
-              <Link to="/products">
-                <Button variant="outline" size="xl" className="w-full sm:w-auto px-10 text-lg bg-white/50 border-primary/50">
-                  Explore Solutions
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+            {/* LEFT SIDE: Content */}
+            <motion.div 
+              className="flex-1 text-center lg:text-left"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-5xl md:text-7xl font-bold text-primary mb-8">
+                Step into the Future.
+              </h2>
+              <p className="text-xl md:text-2xl text-foreground/80 mb-12 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                Let's discuss how our XR and AI solutions can unlock new possibilities and create a competitive advantage for your organization.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center">
+                <a href="mailto:support@evikainnovations.com" className="w-full sm:w-auto">
+                  <Button size="xl" className="w-full px-12 h-14 text-lg shadow-xl bg-primary hover:bg-primary/90 text-white font-semibold rounded-full">
+                    Book a Demo
+                  </Button>
+                </a>
+                <Link to="/products" className="w-full sm:w-auto">
+                  <Button variant="outline" size="xl" className="w-full px-12 h-14 text-lg bg-transparent border-2 border-primary text-primary font-semibold rounded-full hover:bg-primary/10">
+                    Explore Solutions
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* RIGHT SIDE: Video Player */}
+            <motion.div 
+              className="flex-1 w-full max-w-2xl"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50">
+                <video
+                  src="/logo_aniamtion.mp4" 
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                {/* Optional overlay for better contrast if needed */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none" />
+              </div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
@@ -216,7 +226,7 @@ const Home = () => {
   );
 };
 
-// --- Particle Background (Unchanged logic, just used in full section now) ---
+// --- Particle Background (Unchanged) ---
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -239,7 +249,7 @@ const ParticleBackground = () => {
     handleResize();
 
     const particlesArray: Particle[] = [];
-    const numberOfParticles = 100; // Increased slightly for full screen
+    const numberOfParticles = 100; 
 
     class Particle {
       x: number;
@@ -291,7 +301,7 @@ const ParticleBackground = () => {
           const dy = particlesArray[i].y - particlesArray[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) { // Increased connection distance slightly for full screen
+          if (distance < 150) { 
             ctx.beginPath();
             const opacity = Math.max(0, 1 - distance / 150);
             ctx.strokeStyle = `rgba(88, 28, 135, ${opacity * 0.5})`;
