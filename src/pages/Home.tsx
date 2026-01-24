@@ -293,8 +293,9 @@ const ParticleBackground = () => {
 
           if (distance < 150) { // Increased connection distance slightly for full screen
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(147, 51, 234, ${0.15 - distance / 1000})`; 
-            ctx.lineWidth = 0.5;
+            const opacity = Math.max(0, 1 - distance / 150);
+            ctx.strokeStyle = `rgba(88, 28, 135, ${opacity * 0.5})`;
+            ctx.lineWidth = 1;
             ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
             ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
             ctx.stroke();
