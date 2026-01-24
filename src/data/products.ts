@@ -23,7 +23,7 @@ export const products: Product[] = [
     alt: "Patient using Vita Verse XR rehabilitation system",
 
     demoVideoUrl:
-      "https://youtu.be/_gDz_bvnWl0?si=z8q6ZPpywZnsLJdz",
+      "https://www.youtube.com/embed/_gDz_bvnWl0",
 
     features: [
       { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
