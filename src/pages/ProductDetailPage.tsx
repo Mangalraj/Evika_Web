@@ -37,8 +37,7 @@ import {
   Landmark, Laptop, BrainCircuit, Paintbrush, Loader2, PartyPopper
 } from "lucide-react";
 
-
-// A utility function to get the Lucide icon component by its string name
+// Icon Mapper
 const getLucideIcon = (iconName: string) => {
   const icons: { [key: string]: React.ElementType } = {
     ClipboardCheck, Gamepad, BarChart, ShieldCheck, Brain, Hand, Stethoscope, Users,
@@ -95,7 +94,7 @@ const ProductDetailPage = () => {
       if (!response.ok) {
         throw new Error(result.message || "An error occurred.");
       }
-      
+
       setIsSubmissionSuccessful(true);
       setFormData({ name: "", email: "", company: "", reason: "" });
 
@@ -105,7 +104,7 @@ const ProductDetailPage = () => {
       setIsSubmitting(false);
     }
   };
-  
+
   const handleModalOpenChange = (open: boolean) => {
     setIsModalOpen(open);
     if (!open) {
@@ -117,6 +116,7 @@ const ProductDetailPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
+
         {/* Hero Section */}
         <section className="py-20 px-6 bg-secondary">
           <div className="container mx-auto text-center">
@@ -147,6 +147,7 @@ const ProductDetailPage = () => {
                   className="w-full rounded-3xl shadow-xl"
                 />
               </motion.div>
+
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -169,6 +170,7 @@ const ProductDetailPage = () => {
                         Request Brochure
                       </Button>
                     </DialogTrigger>
+
                     <DialogContent className="sm:max-w-[480px]">
                       {isSubmissionSuccessful ? (
                         <div>
@@ -176,10 +178,10 @@ const ProductDetailPage = () => {
                             <DialogTitle className="text-center text-2xl">Thank You!</DialogTitle>
                           </DialogHeader>
                           <div className="py-6 text-center">
-                              <PartyPopper className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                              <p className="text-muted-foreground">
-                                  Your request has been received. Our team will review it and send the brochure to your email within <strong>24 business hours</strong>.
-                              </p>
+                            <PartyPopper className="h-16 w-16 text-green-500 mx-auto mb-4" />
+                            <p className="text-muted-foreground">
+                              Your request has been received. Our team will send the brochure within <strong>24 business hours</strong>.
+                            </p>
                           </div>
                           <DialogFooter>
                             <Button onClick={() => setIsModalOpen(false)}>Close</Button>
@@ -190,9 +192,10 @@ const ProductDetailPage = () => {
                           <DialogHeader>
                             <DialogTitle>Request the Brochure</DialogTitle>
                             <DialogDescription>
-                              To receive the brochure, please provide your details below.
+                              Please provide your details below.
                             </DialogDescription>
                           </DialogHeader>
+
                           <div className="grid gap-4 py-4">
                             <div className="grid grid-cols-4 items-center gap-4">
                               <Label htmlFor="name" className="text-right">Name</Label>
@@ -204,20 +207,25 @@ const ProductDetailPage = () => {
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
                               <Label htmlFor="company" className="text-right">Company</Label>
-                              <Input id="company" value={formData.company} onChange={handleInputChange} className="col-span-3" placeholder="(Optional)"/>
+                              <Input id="company" value={formData.company} onChange={handleInputChange} className="col-span-3" />
                             </div>
-                            <div className="grid grid-cols-4 items-start gap-4 pt-2">
-                                <Label htmlFor="reason" className="text-right pt-2">Purpose</Label>
-                                <Textarea id="reason" value={formData.reason} onChange={handleInputChange} className="col-span-3" placeholder="e.g., Evaluating for a project, academic research, etc." required />
+                            <div className="grid grid-cols-4 items-start gap-4">
+                              <Label htmlFor="reason" className="text-right pt-2">Purpose</Label>
+                              <Textarea id="reason" value={formData.reason} onChange={handleInputChange} className="col-span-3" required />
                             </div>
                           </div>
 
-                          {formError && <p className="text-sm text-red-500 text-center mb-4">{formError}</p>}
-                          
+                          {formError && (
+                            <p className="text-sm text-red-500 text-center mb-4">{formError}</p>
+                          )}
+
                           <DialogFooter>
                             <Button type="submit" disabled={isSubmitting}>
                               {isSubmitting ? (
-                                <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</>
+                                <>
+                                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                  Submitting...
+                                </>
                               ) : "Submit Request"}
                             </Button>
                           </DialogFooter>
@@ -252,9 +260,7 @@ const ProductDetailPage = () => {
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <IconComponent className="w-8 h-8 text-primary" />
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {feature.name}
-                    </h3>
+                    <h3 className="text-lg font-semibold">{feature.name}</h3>
                   </motion.div>
                 );
               })}
@@ -262,51 +268,59 @@ const ProductDetailPage = () => {
           </div>
         </section>
 
-        {/* Demo Video Section */}
+        {/* 🔥 UPDATED Demo Video Section (ONLY CHANGE) */}
         <section className="py-20 px-6 bg-background">
           <div className="container mx-auto text-center">
             <h2 className="text-4xl font-bold text-primary mb-12">
               Watch it in Action
             </h2>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-muted rounded-3xl aspect-video flex items-center justify-center max-w-4xl mx-auto cursor-pointer group shadow-lg"
-            >
-              <div className="text-center">
-                <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/30 transition-all duration-300 transform group-hover:scale-110">
-                  <Play
-                    className="w-12 h-12 text-primary"
-                    fill="currentColor"
-                  />
-                </div>
-                <p className="text-muted-foreground font-semibold">
-                  Play Demo Video
-                </p>
+
+            {product.demoVideoUrl ? (
+              <div className="max-w-4xl mx-auto aspect-video rounded-3xl overflow-hidden shadow-lg">
+                <iframe
+                  src={product.demoVideoUrl}
+                  title={`${product.title} Demo Video`}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                />
               </div>
-            </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="bg-muted rounded-3xl aspect-video flex items-center justify-center max-w-4xl mx-auto cursor-pointer group shadow-lg"
+              >
+                <div className="text-center">
+                  <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <Play className="w-12 h-12 text-primary" fill="currentColor" />
+                  </div>
+                  <p className="text-muted-foreground font-semibold">
+                    Play Demo Video
+                  </p>
+                </div>
+              </motion.div>
+            )}
           </div>
         </section>
+
       </main>
 
-      {/* Floating "Back to Products" Button with Tooltip */}
+      {/* Floating Back Button */}
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
+              transition={{ duration: 0.4, delay: 0.5 }}
               className="fixed top-20 right-8 z-50"
             >
-              <Button
-                asChild
-                size="icon"
-                className="h-14 w-14 rounded-full shadow-lg"
-              >
-                <Link to="/products" aria-label="Back to All Products">
+              <Button asChild size="icon" className="h-14 w-14 rounded-full shadow-lg">
+                <Link to="/products">
                   <ArrowLeft className="h-6 w-6" />
                 </Link>
               </Button>
