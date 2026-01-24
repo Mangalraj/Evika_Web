@@ -83,7 +83,7 @@ const Home = () => {
                   initial={{ scale: 0.95, filter: "blur(8px)" }}
                   animate={{ scale: 1, filter: "blur(0px)" }}
                   transition={{ duration: 1.2, delay: 0.2 }}
-                  className="text-5xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-800 mb-6"
+                  className="text-5xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-800 mb-6 p-4"
                 >
                   EVIKA INNOVATIONS 
                 </motion.h1>
@@ -251,7 +251,7 @@ const ParticleBackground = () => {
       constructor() {
         this.x = Math.random() * (canvas?.width || 0);
         this.y = Math.random() * (canvas?.height || 0);
-        this.size = Math.random() * 3 + 1.5; 
+        this.size = Math.random() * 6 + 4; 
         this.speedX = Math.random() * 0.4 - 0.2;
         this.speedY = Math.random() * 0.4 - 0.2;
       }
@@ -268,7 +268,7 @@ const ParticleBackground = () => {
       }
       draw() {
         if (!ctx) return;
-        ctx.fillStyle = "rgba(147, 51, 234, 0.4)"; 
+        ctx.fillStyle = "rgba(88, 28, 135, 0.8)"; 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
