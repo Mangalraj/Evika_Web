@@ -22,9 +22,8 @@ export const products: Product[] = [
     image: "/vitaVerse-background.png",
     alt: "Patient using Vita Verse XR rehabilitation system",
 
-    // ✅ UPDATED: enablejsapi=1 added (required for unMute button)
     demoVideoUrl:
-      "https://www.youtube.com/embed/xnOXV6QoHnk?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=xnOXV6QoHnk&controls=0&rel=0",
+      "https://youtu.be/_gDz_bvnWl0?si=z8q6ZPpywZnsLJdz",
 
     features: [
       { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
