@@ -162,7 +162,7 @@ const Home = () => {
       </section>
 
       {/* --- Contact/Video Section (UPDATED) --- */}
-      <section className="relative py-32 px-6 overflow-hidden bg-gradient-to-b from-secondary via-secondary via-70% to-background">
+      <section className="relative py-32 px-6 overflow-hidden bg-gradient-to-b from-white to-purple-50">
         <div className="container mx-auto relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
             
