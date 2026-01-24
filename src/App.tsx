@@ -4,11 +4,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SpeedInsights } from "@/components/SpeedInsights";
+import ScrollToTop from "@/components/ScrollToTop"; // Added import
 
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Products from "./pages/Products";
-import ProductDetailPage from "./pages/ProductDetailPage"; // 1. Import the new detail page component
+import ProductDetailPage from "./pages/ProductDetailPage"; 
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -20,6 +21,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        {/* Added ScrollToTop here so it watches for URL changes */}
+        <ScrollToTop /> 
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
