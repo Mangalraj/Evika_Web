@@ -85,7 +85,7 @@ const Home = () => {
                   transition={{ duration: 1.2, delay: 0.2 }}
                   className="text-5xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-800 mb-6"
                 >
-                  EVIKA INNOVATIONS
+                  EVIKA INNOVATIONS 
                 </motion.h1>
 
                 <motion.p
