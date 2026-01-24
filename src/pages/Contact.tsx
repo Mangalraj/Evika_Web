@@ -87,7 +87,8 @@ const Contact = () => {
                 className="bg-secondary rounded-3xl border-2 border-primary/30 overflow-hidden aspect-square"
               >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d677.8078881310778!2d77.59589632922231!3d13.28755957680955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb1df1ef700c569%3A0x63c48bea1860047d!2sGitam%20School%20Of%20Technology!5e0!3m2!1sen!2sin!4v1761298694945!5m2!1sen!2sin"
+                  // UPDATED: Changed 'http' to 'https' here
+                  src="https://googleusercontent.com/maps.google.com/0"
                   width="100%"
                   height="100%"
                   style={{ border:0 }}
