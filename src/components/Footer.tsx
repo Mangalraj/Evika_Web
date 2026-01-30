@@ -9,11 +9,13 @@ const Footer = () => {
         {/* TOP SECTION: Logo & Contact */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-8">
           {/* LOGO IMAGE */}
-          <img
-            src="/logo.png"
-            alt="Evika Innovations Logo"
-            className="w-82 h-16"
-          />
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <img
+              src="/logo.png"
+              alt="Evika Innovations Logo"
+              className="w-82 h-16 object-contain" // Added object-contain for safety
+            />
+          </div>
 
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-bold text-primary mb-6">
@@ -74,11 +76,19 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Copyright */}
-        <div className="mt-12 pt-8 border-t border-primary/10 text-center">
+        {/* BOTTOM SECTION: Copyright & Legal */}
+        <div className="mt-12 pt-8 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="text-sm text-muted-foreground">
             &copy; {currentYear} Evika Innovations. All rights reserved.
           </p>
+          
+          {/* GSTIN Section - Professional Placement */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-muted-foreground">GSTIN:</span>
+            <span className="text-sm font-semibold text-primary/80 tracking-wide">
+              33AAMFE4978K1ZV
+            </span>
+          </div>
         </div>
       </div>
     </footer>
