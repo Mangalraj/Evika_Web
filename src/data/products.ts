@@ -41,6 +41,8 @@ export const products: Product[] = [
       "Immersa elevates your brand with Advanced Digital Advertising using cutting-edge Holographic Projection. We create attention-grabbing, 3D marketing experiences that stop customers in their tracks, offering a futuristic way to visualize products and tell your brand story.",
     image: "/immersafinalimage.png",
     alt: "Holographic advertising display in a modern setting",
+
+    demoVideoUrl: "https://www.youtube.com/embed/sdGCGkuExes",
     features: [
       { name: "Holographic 3D Projection", icon: "Monitor" },
       { name: "Interactive Brand Storytelling", icon: "Zap" },
