@@ -8,7 +8,8 @@ export interface Product {
   image: string;
   alt: string;
   features: { name: string; icon: string }[];
-  demoVideoUrl?: string; // optional
+  demoVideoUrl?: string;
+  brochurePath?: string; // path to PDF in /public folder, e.g. "/brochures/vitaverse.pdf"
 }
 
 export const products: Product[] = [
@@ -21,10 +22,8 @@ export const products: Product[] = [
       "VitaVerse transforms physical therapy into an engaging, gamified experience. Our XR rehabilitation ecosystem is specifically designed for locomotory disabilities, offering personalized exercise plans, real-time feedback, and high-retention gameplay that makes healing fun and measurable.",
     image: "/vitaVerse-background.png",
     alt: "Patient using Vita Verse XR rehabilitation system",
-
-    demoVideoUrl:
-      "https://www.youtube.com/embed/_gDz_bvnWl0",
-
+    demoVideoUrl: "https://www.youtube.com/embed/_gDz_bvnWl0",
+    brochurePath: "/brochures/vitaverse.pdf", // place your PDF at public/brochures/vitaverse.pdf
     features: [
       { name: "Personalized Therapy Plans", icon: "ClipboardCheck" },
       { name: "Gamified Exercises for High Retention", icon: "Gamepad" },
@@ -41,8 +40,8 @@ export const products: Product[] = [
       "Immersa elevates your brand with Advanced Digital Advertising using cutting-edge Holographic Projection. We create attention-grabbing, 3D marketing experiences that stop customers in their tracks, offering a futuristic way to visualize products and tell your brand story.",
     image: "/immersafinalimage.png",
     alt: "Holographic advertising display in a modern setting",
-
     demoVideoUrl: "https://www.youtube.com/embed/sdGCGkuExes",
+    brochurePath: "/brochures/immersa.pdf", // place your PDF at public/brochures/immersa.pdf
     features: [
       { name: "Holographic 3D Projection", icon: "Monitor" },
       { name: "Interactive Brand Storytelling", icon: "Zap" },
@@ -59,6 +58,7 @@ export const products: Product[] = [
       "ChronosVR is dedicated to preserving culture and history through high-fidelity Virtual Tours. Our platform allows users to explore heritage sites and tourism destinations from anywhere in the world, offering an immersive, educational journey through time and space.",
     image: "/chronosvrfinaleimage.jpg",
     alt: "User exploring a virtual heritage site",
+    brochurePath: "/brochures/chronos-vr.pdf", // place your PDF at public/brochures/chronos-vr.pdf
     features: [
       { name: "High-Fidelity 360° Tours", icon: "Camera" },
       { name: "Cultural Heritage Preservation", icon: "Landmark" },
@@ -75,6 +75,7 @@ export const products: Product[] = [
       "SyncLathe implies synchronization between the digital model and real-world physics. It is a cutting-edge Digital Twin Technology application designed for Industry support, specifically for CNC Lathe Machines, enabling safe, risk-free training and operational optimization in an Industry 5.0 environment.",
     image: "/synclathefinaleimage.jpg",
     alt: "Digital twin of a CNC machine interface",
+    brochurePath: "/brochures/synclathe.pdf", // place your PDF at public/brochures/synclathe.pdf
     features: [
       { name: "Real-time Physics Synchronization", icon: "RefreshCw" },
       { name: "CNC Lathe Machine Simulation", icon: "Settings" },
