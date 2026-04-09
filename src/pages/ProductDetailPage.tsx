@@ -34,7 +34,8 @@ import {
   ShieldCheck, Brain, Hand, Stethoscope, Users, RefreshCw,
   Gauge, Workflow, Cloud, AlertTriangle, Settings, Award, Activity,
   Globe, FlaskConical, BookOpen, Download, Camera, Map, Home,
-  Landmark, Laptop, BrainCircuit, Paintbrush, Loader2, PartyPopper
+  Landmark, Laptop, BrainCircuit, Paintbrush, Loader2, PartyPopper,
+  FileDown,
 } from "lucide-react";
 
 // Icon Mapper
@@ -80,6 +81,9 @@ const ProductDetailPage = () => {
     setFormError(null);
 
     try {
+      // Optional: still notify your backend about the request
+      // If you don't need a backend call at all, remove the fetch block below
+      // and just set isSubmissionSuccessful(true) directly.
       const response = await fetch("/api/request-brochure", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -98,6 +102,9 @@ const ProductDetailPage = () => {
       setIsSubmissionSuccessful(true);
       setFormData({ name: "", email: "", company: "", reason: "" });
     } catch (error: any) {
+      // If you removed the backend call, delete this catch block too.
+      // If the API fails but you still want to allow the download, change
+      // the line below to: setIsSubmissionSuccessful(true);
       setFormError(error.message || "Failed to submit request. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -107,8 +114,22 @@ const ProductDetailPage = () => {
   const handleModalOpenChange = (open: boolean) => {
     setIsModalOpen(open);
     if (!open) {
+      // Reset success state after the modal close animation completes
       setTimeout(() => setIsSubmissionSuccessful(false), 300);
     }
+  };
+
+  // Programmatic download helper — triggers browser's native download using
+  // the brochurePath stored in the product data (e.g. "/brochures/vitaverse.pdf")
+  const handleDownload = () => {
+    if (!product.brochurePath) return;
+    const link = document.createElement("a");
+    link.href = product.brochurePath;
+    // Suggest a clean filename: "VitaVerse Brochure.pdf"
+    link.download = `${product.title} Brochure.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -161,79 +182,131 @@ const ProductDetailPage = () => {
                   </p>
                 </div>
 
-                <div className="mt-8 flex justify-end">
-                  <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
-                    <DialogTrigger asChild>
-                      <Button size="lg">
-                        <Download className="mr-2 h-5 w-5" />
-                        Request Brochure
-                      </Button>
-                    </DialogTrigger>
+                {/* Only show the button if a brochure exists for this product */}
+                {product.brochurePath && (
+                  <div className="mt-8 flex justify-end">
+                    <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
+                      <DialogTrigger asChild>
+                        <Button size="lg">
+                          <Download className="mr-2 h-5 w-5" />
+                          Request Brochure
+                        </Button>
+                      </DialogTrigger>
 
-                    <DialogContent className="sm:max-w-[480px]">
-                      {isSubmissionSuccessful ? (
-                        <div>
-                          <DialogHeader>
-                            <DialogTitle className="text-center text-2xl">Thank You!</DialogTitle>
-                          </DialogHeader>
-                          <div className="py-6 text-center">
-                            <PartyPopper className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                            <p className="text-muted-foreground">
-                              Your request has been received. Our team will send the brochure within{" "}
-                              <strong>24 business hours</strong>.
-                            </p>
-                          </div>
-                          <DialogFooter>
-                            <Button onClick={() => setIsModalOpen(false)}>Close</Button>
-                          </DialogFooter>
-                        </div>
-                      ) : (
-                        <form onSubmit={handleBrochureRequest}>
-                          <DialogHeader>
-                            <DialogTitle>Request the Brochure</DialogTitle>
-                            <DialogDescription>
-                              Please provide your details below.
-                            </DialogDescription>
-                          </DialogHeader>
+                      <DialogContent className="sm:max-w-[480px]">
 
-                          <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-4 items-center gap-4">
-                              <Label htmlFor="name" className="text-right">Name</Label>
-                              <Input id="name" value={formData.name} onChange={handleInputChange} className="col-span-3" required />
+                        {/* ── SUCCESS STATE: show download button inside the card ── */}
+                        {isSubmissionSuccessful ? (
+                          <div>
+                            <DialogHeader>
+                              <DialogTitle className="text-center text-2xl">
+                                Your Brochure is Ready!
+                              </DialogTitle>
+                            </DialogHeader>
+
+                            <div className="py-6 text-center space-y-4">
+                              <PartyPopper className="h-16 w-16 text-green-500 mx-auto" />
+                              <p className="text-muted-foreground">
+                                Thank you! Click the button below to download the{" "}
+                                <strong>{product.title}</strong> brochure.
+                              </p>
+
+                              {/* ── DOWNLOAD BUTTON ── */}
+                              <Button
+                                size="lg"
+                                className="w-full"
+                                onClick={handleDownload}
+                              >
+                                <FileDown className="mr-2 h-5 w-5" />
+                                Download Brochure
+                              </Button>
                             </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
-                              <Label htmlFor="email" className="text-right">Email</Label>
-                              <Input id="email" type="email" value={formData.email} onChange={handleInputChange} className="col-span-3" required />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
-                              <Label htmlFor="company" className="text-right">Company</Label>
-                              <Input id="company" value={formData.company} onChange={handleInputChange} className="col-span-3" />
-                            </div>
-                            <div className="grid grid-cols-4 items-start gap-4">
-                              <Label htmlFor="reason" className="text-right pt-2">Purpose</Label>
-                              <Textarea id="reason" value={formData.reason} onChange={handleInputChange} className="col-span-3" required />
-                            </div>
+
+                            <DialogFooter>
+                              <Button
+                                variant="outline"
+                                onClick={() => setIsModalOpen(false)}
+                              >
+                                Close
+                              </Button>
+                            </DialogFooter>
                           </div>
 
-                          {formError && (
-                            <p className="text-sm text-red-500 text-center mb-4">{formError}</p>
-                          )}
+                        ) : (
+                        /* ── FORM STATE ── */
+                          <form onSubmit={handleBrochureRequest}>
+                            <DialogHeader>
+                              <DialogTitle>Request the Brochure</DialogTitle>
+                              <DialogDescription>
+                                Please provide your details below.
+                              </DialogDescription>
+                            </DialogHeader>
 
-                          <DialogFooter>
-                            <Button type="submit" disabled={isSubmitting}>
-                              {isSubmitting ? (
-                                <>
-                                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                  Submitting...
-                                </>
-                              ) : "Submit Request"}
-                            </Button>
-                          </DialogFooter>
-                        </form>
-                      )}
-                    </DialogContent>
-                  </Dialog>
-                </div>
+                            <div className="grid gap-4 py-4">
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="name" className="text-right">Name</Label>
+                                <Input
+                                  id="name"
+                                  value={formData.name}
+                                  onChange={handleInputChange}
+                                  className="col-span-3"
+                                  required
+                                />
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="email" className="text-right">Email</Label>
+                                <Input
+                                  id="email"
+                                  type="email"
+                                  value={formData.email}
+                                  onChange={handleInputChange}
+                                  className="col-span-3"
+                                  required
+                                />
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="company" className="text-right">Company</Label>
+                                <Input
+                                  id="company"
+                                  value={formData.company}
+                                  onChange={handleInputChange}
+                                  className="col-span-3"
+                                />
+                              </div>
+                              <div className="grid grid-cols-4 items-start gap-4">
+                                <Label htmlFor="reason" className="text-right pt-2">Purpose</Label>
+                                <Textarea
+                                  id="reason"
+                                  value={formData.reason}
+                                  onChange={handleInputChange}
+                                  className="col-span-3"
+                                  required
+                                />
+                              </div>
+                            </div>
+
+                            {formError && (
+                              <p className="text-sm text-red-500 text-center mb-4">
+                                {formError}
+                              </p>
+                            )}
+
+                            <DialogFooter>
+                              <Button type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? (
+                                  <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Submitting...
+                                  </>
+                                ) : "Submit Request"}
+                              </Button>
+                            </DialogFooter>
+                          </form>
+                        )}
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                )}
               </motion.div>
             </div>
           </div>
@@ -268,7 +341,7 @@ const ProductDetailPage = () => {
           </div>
         </section>
 
-        {/* Demo Video Section – Simbott style */}
+        {/* Demo Video Section */}
         <section className="py-20 px-6 bg-background">
           <div className="container mx-auto text-center">
             <h2 className="text-4xl font-bold text-primary mb-12">
