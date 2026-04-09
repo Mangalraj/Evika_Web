@@ -41,7 +41,7 @@ export const products: Product[] = [
     image: "/immersafinalimage.png",
     alt: "Holographic advertising display in a modern setting",
     demoVideoUrl: "https://www.youtube.com/embed/sdGCGkuExes",
-    brochurePath: "/brochures/immersa.pdf", // place your PDF at public/brochures/immersa.pdf
+    brochurePath: "/immersaBrochure.pdf", 
     features: [
       { name: "Holographic 3D Projection", icon: "Monitor" },
       { name: "Interactive Brand Storytelling", icon: "Zap" },
