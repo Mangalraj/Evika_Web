@@ -87,195 +87,137 @@ const About = () => {
           </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Member 1: Dr Mangalraj P */}
             <motion.a
-  href="https://www.linkedin.com/in/mangalraj86/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="View LinkedIn Profile"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
-  className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
->
-  {/* Tooltip */}
-  <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
-    View LinkedIn Profile
-  </span>
-
-  {/* LinkedIn Icon */}
-  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="text-white"
-    >
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
-    </svg>
-  </div>
-
-  {/* Content */}
-  <div className="p-6 text-center text-primary-foreground">
-    <h3 className="text-xl font-bold mb-1">Dr Mangalraj P</h3>
-    <p className="text-sm">Director - Extended Reality Technology</p>
-  </div>
-</motion.a>
-
-           <motion.a
-  href="https://www.linkedin.com/in/antony-arul-selvaraj-2ba37b57/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="View LinkedIn Profile"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
-  className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
->
-  {/* Tooltip */}
-  <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
-    View LinkedIn Profile
-  </span>
-
-  {/* LinkedIn Icon */}
-  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="text-white"
-    >
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
-    </svg>
-  </div>
-
-  {/* Content */}
-  <div className="p-6 text-center text-primary-foreground">
-    <h3 className="text-xl font-bold mb-1">Mr Antony Arul Selvaraj</h3>
-    <p className="text-sm">Director - Cyberspace</p>
-  </div>
-</motion.a>
-
-
-             <motion.a
-  href="https://www.linkedin.com/in/syed-taha-4aa81a29b/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="View LinkedIn Profile"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
-  className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
->
-  {/* Tooltip */}
-  <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
-    View LinkedIn Profile
-  </span>
-
-  {/* LinkedIn Icon */}
-  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="text-white"
-    >
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
-    </svg>
-  </div>
-
-  {/* Content */}
-  <div className="p-6 text-center text-primary-foreground">
-    <h3 className="text-xl font-bold mb-1">Mr Syed Taha</h3>
-    <p className="text-sm">Extended Reality Application Developer</p>
-  </div>
-</motion.a>
-
-            
-            <motion.a
-  href="https://www.linkedin.com/in/pruthviraj-k-p-b4940025b/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="View LinkedIn Profile"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
-  className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
->
-  {/* Tooltip */}
-  <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
-    View LinkedIn Profile
-  </span>
-
-  {/* LinkedIn Icon */}
-  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="text-white"
-    >
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
-    </svg>
-  </div>
-
-  {/* Content */}
-  <div className="p-6 text-center text-primary-foreground">
-    <h3 className="text-xl font-bold mb-1">Mr Pruthviraj K P</h3>
-    <p className="text-sm">Extended Reality Application Developer and Web Support</p>
-  </div>
-</motion.a>
-
-           <motion.a
-  href="https://www.linkedin.com/in/sai-krishna-b-8a42a5376/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="View LinkedIn Profile"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
-  className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
->
-  {/* Tooltip */}
-  <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
-    View LinkedIn Profile
-  </span>
-
-  {/* LinkedIn Icon */}
-  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="text-white"
-    >
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
-    </svg>
-  </div>
-
-  {/* Content */}
-  <div className="p-6 text-center text-primary-foreground">
-    <h3 className="text-xl font-bold mb-1">Mr Sai Krishna B</h3>
-    <p className="text-sm">Extended Reality Application Developer and Graphics Support</p>
-  </div>
-</motion.a>
+              href="https://www.linkedin.com/in/mangalraj86/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View LinkedIn Profile"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
+            >
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
+                View LinkedIn Profile
+              </span>
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="text-white">
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
+                </svg>
+              </div>
+              <div className="p-6 text-center text-primary-foreground">
+                <h3 className="text-xl font-bold mb-1">Dr Mangalraj P</h3>
+                <p className="text-sm">Director - Extended Reality Technology</p>
+              </div>
             </motion.a>
 
-            {/* Mr Chetan Kumar Subbann */}
+            {/* Member 2: Mr Antony Arul Selvaraj */}
+            <motion.a
+              href="https://www.linkedin.com/in/antony-arul-selvaraj-2ba37b57/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View LinkedIn Profile"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
+            >
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
+                View LinkedIn Profile
+              </span>
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="text-white">
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
+                </svg>
+              </div>
+              <div className="p-6 text-center text-primary-foreground">
+                <h3 className="text-xl font-bold mb-1">Mr Antony Arul Selvaraj</h3>
+                <p className="text-sm">Director - Cyberspace</p>
+              </div>
+            </motion.a>
+
+            {/* Member 3: Mr Syed Taha */}
+            <motion.a
+              href="https://www.linkedin.com/in/syed-taha-4aa81a29b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View LinkedIn Profile"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
+            >
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
+                View LinkedIn Profile
+              </span>
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="text-white">
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
+                </svg>
+              </div>
+              <div className="p-6 text-center text-primary-foreground">
+                <h3 className="text-xl font-bold mb-1">Mr Syed Taha</h3>
+                <p className="text-sm">Extended Reality Application Developer</p>
+              </div>
+            </motion.a>
+
+            {/* Member 4: Mr Pruthviraj K P */}
+            <motion.a
+              href="https://www.linkedin.com/in/pruthviraj-k-p-b4940025b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View LinkedIn Profile"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
+            >
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
+                View LinkedIn Profile
+              </span>
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="text-white">
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
+                </svg>
+              </div>
+              <div className="p-6 text-center text-primary-foreground">
+                <h3 className="text-xl font-bold mb-1">Mr Pruthviraj K P</h3>
+                <p className="text-sm">Extended Reality Application Developer and Web Support</p>
+              </div>
+            </motion.a>
+
+            {/* Member 5: Mr Sai Krishna B */}
+            <motion.a
+              href="https://www.linkedin.com/in/sai-krishna-b-8a42a5376/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View LinkedIn Profile"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-b from-primary to-primary/80 rounded-3xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] transition-transform"
+            >
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-3 py-1 rounded-md">
+                View LinkedIn Profile
+              </span>
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="text-white">
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
+                </svg>
+              </div>
+              <div className="p-6 text-center text-primary-foreground">
+                <h3 className="text-xl font-bold mb-1">Mr Sai Krishna B</h3>
+                <p className="text-sm">Extended Reality Application Developer and Graphics Support</p>
+              </div>
+            </motion.a>
+
+            {/* Member 6: Mr Chetan Kumar Subbannavaru */}
             <motion.a
               href="https://www.linkedin.com/in/chetan-kumar-subbannavaru-41a40025b/"
               target="_blank"
@@ -292,7 +234,7 @@ const About = () => {
               </span>
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="text-white">
-                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z" />
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.67-1.27 2.3-2.6 4.7-2.6C22.5 7.6 24 10.2 24 14.3V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8z"/>
                 </svg>
               </div>
               <div className="p-6 text-center text-primary-foreground">
@@ -300,7 +242,6 @@ const About = () => {
                 <p className="text-sm">Extended Reality Developer and 3D Designer</p>
               </div>
             </motion.a>
-
           </div>
         </div>
       </section>
