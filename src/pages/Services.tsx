@@ -68,74 +68,79 @@ const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-secondary to-background">
-        <div className="container mx-auto text-center">
-          <motion.h1 
+      <main>
+        {/* Page Header - Updated to match Products page style */}
+        <section className="py-20 px-6 text-center bg-secondary">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-800 mb-6"
+            transition={{ duration: 0.5 }}
+            className="text-5xl md:text-6xl font-bold text-primary"
           >
             Reality as a Service
           </motion.h1>
-          <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-            From hardware maintenance to complex spatial computing solutions, we provide the full spectrum of XR services for the modern enterprise.
-          </p>
-        </div>
-      </section>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto"
+          >
+            From hardware maintenance to complex spatial computing solutions, we 
+            provide the full spectrum of XR services for the modern enterprise.
+          </motion.p>
+        </section>
 
-      {/* Services Grid */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Services Grid */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-secondary rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group border border-primary/5"
+                className="bg-secondary rounded-2xl overflow-hidden flex flex-col group shadow-md hover:shadow-xl transition-shadow border border-primary/5"
               >
-                <div className="h-48 overflow-hidden">
+                <div className="overflow-hidden bg-black h-64">
                   <img 
                     src={service.image} 
                     alt={service.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="p-8">
+                <div className="p-6 flex flex-col flex-grow">
                   <div className="mb-4">{service.icon}</div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">{service.title}</h3>
-                  <p className="text-foreground/80 leading-relaxed text-sm">
+                  <h3 className="text-xl font-bold text-foreground mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
                     {service.description}
                   </p>
                 </div>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto">
-            <div className="bg-primary rounded-[3rem] p-12 text-center text-primary-foreground relative overflow-hidden shadow-2xl">
-                <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                    <img src="https://www.transparenttextures.com/patterns/cubes.png" alt="pattern" />
-                </div>
-                <h2 className="text-4xl font-bold mb-6 relative z-10">Ready to build the Future?</h2>
-                <p className="text-xl mb-10 opacity-90 relative z-10">Our engineering team is ready to deploy custom XR hardware and software solutions.</p>
-                <a href="/contact" className="relative z-10 inline-block">
-                    <button className="bg-white text-primary px-12 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-lg">
-                    Contact Our Tech Team
-                    </button>
-                </a>
+        {/* CTA Section */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto">
+            <div className="bg-primary rounded-[2rem] p-12 text-center text-primary-foreground relative overflow-hidden shadow-2xl">
+              <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                <img src="https://www.transparenttextures.com/patterns/cubes.png" alt="pattern" />
+              </div>
+              <h2 className="text-4xl font-bold mb-6 relative z-10">Ready to build the Future?</h2>
+              <p className="text-xl mb-10 opacity-90 relative z-10">Our engineering team is ready to deploy custom XR hardware and software solutions.</p>
+              <a href="/contact" className="relative z-10 inline-block">
+                <button className="bg-white text-primary px-12 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-lg">
+                  Contact Our Tech Team
+                </button>
+              </a>
             </div>
-        </div>
-      </section>
-
+          </div>
+        </section>
+      </main>
       <Footer />
     </div>
   );
