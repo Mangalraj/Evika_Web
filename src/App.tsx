@@ -28,7 +28,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
-
+          <Route path="/services" element={<Services />} />
           {/* 2. Add the new dynamic route for individual products */}
           <Route path="/products/:slug" element={<ProductDetailPage />} />
 
