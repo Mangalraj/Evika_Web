@@ -8,6 +8,7 @@ import ScrollToTop from "@/components/ScrollToTop"; // Added import
 
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Services from "./pages/Services";
 import Products from "./pages/Products";
 import ProductDetailPage from "./pages/ProductDetailPage"; 
 import Contact from "./pages/Contact";
