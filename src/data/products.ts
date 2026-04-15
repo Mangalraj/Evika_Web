@@ -41,12 +41,32 @@ export const products: Product[] = [
     image: "/immersafinalimage.png",
     alt: "Holographic advertising display in a modern setting",
     demoVideoUrl: "https://www.youtube.com/embed/sdGCGkuExes",
-    brochurePath: "/immersaBrochure.pdf", 
+    brochurePath: "/immersaBrochure.pdf",
     features: [
       { name: "Holographic 3D Projection", icon: "Monitor" },
       { name: "Interactive Brand Storytelling", icon: "Zap" },
       { name: "High-Impact Visual Marketing", icon: "Megaphone" },
       { name: "Futuristic Product Displays", icon: "Box" },
+    ],
+  },
+  {
+    slug: "indicdrive-xr",
+    title: "IndicDrive XR",
+    description:
+      "Master Every Road. India's first XR-powered driving simulator built for the chaos, complexity, and character of real Indian roads — for both professional training and immersive gaming.",
+    longDescription:
+      "IndicDrive XR is a dual-purpose Extended Reality driving simulator engineered specifically for the unique challenges of Indian road conditions. Whether you're a driving school, fleet operator, or a gamer craving hyper-realistic Indian street action, IndicDrive XR delivers. The training module draws on peer-reviewed research to replicate the unpredictable dynamics of Indian traffic — dense heterogeneous vehicles, sudden jaywalkers, waterlogged potholes, monsoon visibility drops, and wrong-side overtakes — giving learner drivers safe, repeatable exposure to high-risk scenarios before they ever touch a real road. The gaming module flips the script: same hyper-authentic environments, now tuned for adrenaline — open-world Indian cities, highway drag circuits, mountain ghat runs, and multiplayer traffic-weaving challenges. One platform. Two experiences. Zero compromise on realism.",
+    image: "/indicdrive-xr-background.png",
+    alt: "Driver immersed in IndicDrive XR simulator experiencing Indian road conditions",
+    demoVideoUrl: "", // add your demo video URL here
+    brochurePath: "/brochures/indicdrive-xr.pdf", // place your PDF at public/brochures/indicdrive-xr.pdf
+    features: [
+      { name: "Authentic Indian Road & Traffic Simulation", icon: "MapPin" },
+      { name: "High-Risk Scenario Training Modules", icon: "AlertTriangle" },
+      { name: "Immersive XR Gaming with Open-World India", icon: "Gamepad2" },
+      { name: "Real-time Driver Performance Analytics", icon: "BarChart2" },
+      { name: "Dynamic Weather & Monsoon Environments", icon: "CloudRain" },
+      { name: "Multiplayer & Competitive Racing Modes", icon: "Trophy" },
     ],
   },
   {
