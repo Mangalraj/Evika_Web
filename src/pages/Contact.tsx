@@ -82,7 +82,7 @@ const Contact = () => {
                 className="bg-secondary rounded-3xl border-2 border-primary/30 overflow-hidden aspect-square"
               >
                 {/* UPDATED: Uses a valid Google Maps Embed URL for Kappalur, Madurai */}
-                <iframe src="https://www.google.com/maps/embed?pb=!4v1776313262908!6m8!1m7!1svPI-vFWWbQpIMB--yftukQ!2m2!1d9.84789948267985!2d78.01484127360955!3f256.13!4f-0.5499999999999972!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.895345129846!2d78.01640387569664!3d9.85914697544114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00d202bcf0fd83%3A0xe98209367445c32d!2sService%20Rd%2C%20Tamil%20Nadu%20625008!5e0!3m2!1sen!2sin!4v1776313538597!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                   height="100%"
                   style={{ border:0 }}
                   allowFullScreen={true}
