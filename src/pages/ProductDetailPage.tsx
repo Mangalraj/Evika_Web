@@ -1,4 +1,3 @@
-// src/pages/ProductDetailPage.tsx
 
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
@@ -176,7 +175,9 @@ const ProductDetailPage = () => {
                 className="flex flex-col h-full"
               >
                 <div className="flex-grow">
-                  <h2 className="text-3xl font-bold text-foreground mb-4">Overview</h2>
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
+                    Overview
+                  </h2>
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     {product.longDescription}
                   </p>
@@ -195,7 +196,7 @@ const ProductDetailPage = () => {
 
                       <DialogContent className="sm:max-w-[480px]">
 
-                        {/* ── SUCCESS STATE: show download button inside the card ── */}
+                        {/* SUCCESS STATE: show download button inside the card */}
                         {isSubmissionSuccessful ? (
                           <div>
                             <DialogHeader>
@@ -211,7 +212,7 @@ const ProductDetailPage = () => {
                                 <strong>{product.title}</strong> brochure.
                               </p>
 
-                              {/* ── DOWNLOAD BUTTON ── */}
+                              {/* DOWNLOAD BUTTON */}
                               <Button
                                 size="lg"
                                 className="w-full"
@@ -231,9 +232,8 @@ const ProductDetailPage = () => {
                               </Button>
                             </DialogFooter>
                           </div>
-
                         ) : (
-                        /* ── FORM STATE ── */
+                          /* FORM STATE */
                           <form onSubmit={handleBrochureRequest}>
                             <DialogHeader>
                               <DialogTitle>Request the Brochure</DialogTitle>
@@ -244,7 +244,9 @@ const ProductDetailPage = () => {
 
                             <div className="grid gap-4 py-4">
                               <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="name" className="text-right">Name</Label>
+                                <Label htmlFor="name" className="text-right">
+                                  Name
+                                </Label>
                                 <Input
                                   id="name"
                                   value={formData.name}
@@ -253,8 +255,11 @@ const ProductDetailPage = () => {
                                   required
                                 />
                               </div>
+
                               <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="email" className="text-right">Email</Label>
+                                <Label htmlFor="email" className="text-right">
+                                  Email
+                                </Label>
                                 <Input
                                   id="email"
                                   type="email"
@@ -264,8 +269,11 @@ const ProductDetailPage = () => {
                                   required
                                 />
                               </div>
+
                               <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="company" className="text-right">Company</Label>
+                                <Label htmlFor="company" className="text-right">
+                                  Company
+                                </Label>
                                 <Input
                                   id="company"
                                   value={formData.company}
@@ -273,8 +281,11 @@ const ProductDetailPage = () => {
                                   className="col-span-3"
                                 />
                               </div>
+
                               <div className="grid grid-cols-4 items-start gap-4">
-                                <Label htmlFor="reason" className="text-right pt-2">Purpose</Label>
+                                <Label htmlFor="reason" className="text-right pt-2">
+                                  Purpose
+                                </Label>
                                 <Textarea
                                   id="reason"
                                   value={formData.reason}
@@ -298,13 +309,27 @@ const ProductDetailPage = () => {
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                     Submitting...
                                   </>
-                                ) : "Submit Request"}
+                                ) : (
+                                  "Submit Request"
+                                )}
                               </Button>
                             </DialogFooter>
                           </form>
                         )}
                       </DialogContent>
                     </Dialog>
+                  </div>
+                )}
+
+                {/* VitaVerse Privacy Policy Button */}
+                {product.slug === "vitaverse" && (
+                  <div className="mt-4 flex justify-end">
+                    <Button asChild variant="outline" size="lg">
+                      <Link to="/vitaverse-privacy-policy">
+                        <ShieldCheck className="mr-2 h-5 w-5" />
+                        Privacy Policy
+                      </Link>
+                    </Button>
                   </div>
                 )}
               </motion.div>
