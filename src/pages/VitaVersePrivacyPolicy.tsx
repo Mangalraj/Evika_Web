@@ -109,7 +109,7 @@ const VitaVersePrivacyPolicy = () => {
                 a separate web-based platform called the VitaVerse
                 Dashboard, available at{" "}
                 <a
-                  href="https://vitaverse.in"
+                  href="https://www.vitaverse.in/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary underline font-medium"
@@ -597,12 +597,12 @@ const VitaVersePrivacyPolicy = () => {
                     Website:
                   </strong>{" "}
                   <a
-                    href="https://vitaverse.in"
+                    href="https://www.vitaverse.in/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary underline"
                   >
-                    https://vitaverse.in
+                    https://www.vitaverse.in/
                   </a>
                 </p>
 
