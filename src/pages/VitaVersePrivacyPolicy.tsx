@@ -114,7 +114,7 @@ const VitaVersePrivacyPolicy = () => {
                   rel="noopener noreferrer"
                   className="text-primary underline font-medium"
                 >
-                  https://vitaverse.in
+                  https://www.vitaverse.in/
                 </a>
                 . The dashboard is used by patients and therapists
                 for account management, rehabilitation exercise
